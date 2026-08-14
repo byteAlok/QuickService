@@ -533,3 +533,7 @@ Software Development Engineer
 
 **Core interests:**
 C# • ASP.NET Core • JavaScript • React • Next.js • SQL Server • NoSQL • Cloud & Deployment
+
+---
+
+⭐ If you like the portfolio or find the code useful, feel free to star the repository.
