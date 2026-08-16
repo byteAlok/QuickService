@@ -23,13 +23,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore Dependencies
-        run: dotnet restore  QuickService/ QuickService.csproj
+        run: dotnet restore  QuickService/QuickService.csproj
 
       - name: Build Project
-        run: dotnet build  QuickService/ QuickService.csproj --configuration Release --no-restore
+        run: dotnet build  QuickService/QuickService.csproj --configuration Release --no-restore
 
       - name: Publish Project
-        run: dotnet publish  QuickService/ QuickService.csproj --configuration Release --no-build --output ./publish
+        run: dotnet publish  QuickService/QuickService.csproj --configuration Release --no-build --output ./publish
 
       - name: Verify Publish Folder
         shell: pwsh
