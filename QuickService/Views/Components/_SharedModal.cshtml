@@ -1,0 +1,179 @@
+﻿
+
+@* ----------- Status Complete Modal ----------------------*@
+
+<div id="completeModal" class="fixed inset-0 flex items-center justify-center bg-black/40 hidden z-50">
+
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 w-80">
+
+        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">
+            Complete Booking
+        </h3>
+
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+            Mark this booking as completed?
+        </p>
+
+        <div class="flex justify-end gap-2 mt-4">
+
+            <button id="cancelComplete"
+                    class="px-4 py-1 text-sm border rounded-full border-slate-300 dark:border-slate-600">
+                Cancel
+            </button>
+
+            <button id="confirmComplete"
+                    class="px-4 py-1 text-sm bg-emerald-600 hover:bg-emerald-700 text-white rounded-full">
+                Complete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+@* ---------------------- Shared Message Modal -------------------- *@
+
+<div id="shareModal" class="fixed inset-0 flex items-center justify-center bg-black/40 hidden z-50">
+
+    <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-5 w-[320px]">
+
+        <div class="text-center">
+
+            <div class="w-12 h-12 mx-auto rounded-full bg-blue-100 dark:bg-slate-700 flex items-center justify-center">
+                <i class="fa-solid fa-share-nodes text-blue-600 text-2xl"></i>
+            </div>
+
+            <h3 class="mt-3 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                Share Booking
+            </h3>
+
+            <p class="text-xs text-slate-700 dark:text-slate-200 mt-1">
+                Select an app to share booking details.
+            </p>
+
+        </div>
+
+        <!-- Share Apps -->
+
+        <div class="grid grid-cols-4 gap-3 mt-6">
+
+            <button id="shareWhatsapp" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-brands fa-whatsapp text-[28px] text-green-600"></i>
+                </div>
+                <span class="text-[11px]">WhatsApp</span>
+            </button>
+
+            @* <button id="shareEmail" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-solid fa-envelope text-2xl text-red-600"></i>
+                </div>
+                <span class="text-[11px]">Email</span>
+            </button>
+
+            <button id="shareTelegram" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-brands fa-telegram text-[28px] text-sky-500"></i>
+                </div>
+
+                <span class="text-[11px]">Telegram</span>
+
+            </button> *@
+
+            @* <button id="shareSMS" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-solid fa-comment-sms text-2xl text-indigo-500"></i>
+                </div>
+
+                <span class="text-[11px]">SMS</span>
+            </button>
+
+            <button id="shareNative" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-solid fa-share-nodes text-2xl text-violet-600"></i>
+                </div>
+
+                <span class="text-[11px]">More</span>
+
+            </button> *@
+
+            <button id="copyShare" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-regular fa-copy text-2xl"></i>
+                </div>
+                <span class="text-[11px]">Copy</span>
+            </button>
+
+            @* <button id="downloadPdf" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-solid fa-file-pdf text-2xl text-rose-600"></i>
+                </div>
+
+                <span class="text-[11px]">PDF</span>
+
+            </button>
+
+            <button id="sharePrint" class="flex flex-col items-center gap-1 group">
+
+                <div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center group-hover:scale-105 transition">
+                    <i class="fa-solid fa-print text-2xl text-gray-600 dark:text-gray-300"></i>
+                </div>
+
+                <span class="text-[11px]">Print</span>
+
+            </button> *@
+        </div>
+
+        <!-- Footer -->
+
+        <button id="closeShareBtn"
+                class="mt-6 w-full py-2 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+@* ---------- Error Modal -------- *@
+
+<div id="errorModal" class="fixed inset-0 flex items-center justify-center bg-black/40 hidden z-50">
+
+    <div class="w-[340px] rounded-lg bg-white dark:bg-slate-800 shadow-2xl"> 
+
+        <div class="p-6 text-center">
+
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+
+                <i class="fa-solid fa-circle-xmark text-3xl text-red-600"></i>
+
+            </div>
+
+            <h3 class="mt-4 text-lg font-semibold text-slate-800 dark:text-slate-100">
+                Something went wrong
+            </h3>
+
+            <p id="errorMessage"
+               class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                Try Again!
+            </p>
+
+            <button id="closeErrorBtn"
+                    class="mt-6 w-full rounded-lg bg-red-600 py-2.5 font-medium text-white hover:bg-red-700 transition">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+

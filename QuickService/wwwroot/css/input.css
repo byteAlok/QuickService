@@ -1,0 +1,85 @@
+﻿@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* =====================
+     FONTS
+  ====================== */
+    --font-family-sans: "Outfit", sans-serif;
+    --font-family-handwriting: "Dancing Script", cursive;
+    --font-family-serif: "Merriweather", serif;
+    /* =====================
+     CORE COLORS
+  ====================== */
+    --color-googleBlue: #4285F4;
+    --color-googleGreen: #34A853;
+    --color-googleYellow: #FBBC05;
+    --color-googleRed: #EA4335;
+    --color-googleBlack: #202124;
+    --color-cyanAccent: #00E5FF;
+    /* =====================
+     SEMANTIC COLORS
+  ====================== */
+    --color-primary: #4285F4;
+/*    --color-primary: #3b82f6;*/
+    --color-primary-hover: #2563eb;
+    --color-secondary: #202124;
+    --color-accent: #34A853;
+    --color-light: #f3f4f6;
+    --color-dark: #121212;
+    --color-darkCard: #1E1E1E;
+    --color-brandDark: #0F172A;
+    --color-brandLight: #F8FAFC;
+    --color-surface: #ffffff;
+    --color-surfaceDark: #1E293B;
+    /* =====================
+     FONT SIZES
+  ====================== */
+    --font-size-xxs: 0.65rem;
+    /* =====================
+     BACKGROUNDS
+  ====================== */
+    --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+    /* =====================
+     ANIMATIONS
+  ====================== */
+    --animation-float: float 6s ease-in-out infinite;
+    --animation-fade-in: fadeIn 1s ease-out forwards;
+    --animation-fade-in-up: fadeInUp 0.8s ease-out forwards;
+    --animation-scroll: scroll 40s linear infinite;
+    /* =====================
+     KEYFRAMES
+  ====================== */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

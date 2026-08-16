@@ -1,0 +1,510 @@
+
+ @{
+    ViewData["Title"] =
+        "Book Appliance Repair Service Online in Hyderabad Fast & Easy Booking | QuickService";
+
+    ViewData["Description"] =
+        "Book home appliance repair service online in Hyderabad with QuickService. Schedule AC, washing machine, refrigerator, RO, TV & electrician service in minutes. Quick booking, verified technicians, doorstep service & affordable visit charges.";
+}
+
+@section Styles {
+
+    <style>
+        .glass-card {
+            background: rgba(235, 240, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #E2E8F0;
+        }
+
+        /* Animated Progress Bar */
+        .progress-line-container { overflow: hidden; }
+        #progressLine { transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        .step-circle { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform: scale(0.9); }
+        .step-circle.active { background-color: #4285F4; color: white; border-color: #4285F4; transform: scale(1.1); box-shadow: 0 0 15px rgba(66, 133, 244, 0.4); }
+        .step-circle.completed { background-color: #34A853; color: white; border-color: #34A853; transform: scale(1); }
+        
+        /* Custom Styled Dropdowns */
+        .custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+        .dark .custom-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+
+        .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+        .modal-content { animation: slideDown 0.3s ease-out; }
+        @@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .form-step { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .form-step.active { display: block; }
+        @@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Error highlighting */
+        .input-error { border-color: #EF4444 !important; background-color: #FEF2F2 !important; }
+        .dark .input-error { background-color: #450a0a !important; border-color: #EF4444 !important; }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.4s ease-out;
+        }
+    </style>
+}
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/booking-services.js"></script>
+
+}
+
+@{
+    var status = TempData["BookingStatus"] as string;
+    // var status = "Your booking has been submitted successfully!";
+    var type = TempData["BookingType"] as string;
+    // var type = "success";
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="flex justify-center mt-6">
+
+        @if (type == "success")
+        {
+            <div class="flex items-center gap-3 px-6 py-3 border
+                                border-cyan-400 bg-cyan-50 text-cyan-900
+                                dark:border-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-100
+                                shadow-lg max-w-xl w-full rounded-md">
+
+                <i class="fa-solid fa-circle-check text-2xl text-cyan-600 dark:text-cyan-400"></i>
+
+                <div>
+                    <h4 class="font-semibold text-base pb-1 sm:pb-0 leading-tight">
+                        Booking Confirmed
+                    </h4>
+                    <p class="text-sm opacity-90">@status</p>
+                </div>
+            </div>
+        }
+        else if (type == "error")
+        {
+            <div class="flex items-center gap-3 px-6 py-3 border
+                                border-red-300 bg-red-100 text-red-800
+                                dark:border-red-600 dark:bg-red-900/40 dark:text-red-200
+                                shadow-lg max-w-xl w-full rounded-md">
+
+                <i class="fa-solid fa-triangle-exclamation text-2xl text-red-600 dark:text-red-200"></i>
+
+                <div>
+                    <h4 class="font-semibold pb-1 sm:pb-0 text-base leading-tight">
+                        Booking Failed
+                    </h4>
+                    <p class="text-sm opacity-90">@status</p>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+<main class="flex-grow pt-8 pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 mt-8">
+    <div class="max-w-4xl mx-auto pt-6">
+
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Book Repair Online</h1>
+            <p class="text-gray-600 dark:text-gray-400">Schedule your home appliance repair service in minutes.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl shadow-xl overflow-hidden relative">
+
+            <!-- Progress Bar -->
+            <div class="bg-gray-50 dark:bg-gray-800/50 p-6 border-b border-gray-100 dark:border-gray-700">
+                <div class="flex items-center justify-between relative max-w-2xl mx-auto px-4">
+                    <!-- Default Line -->
+                    <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full -z-0"></div>
+                    <!-- Active Line -->
+                    <div id="progressLine" class="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-blue-600 rounded-full transition-all duration-500 ease-out -z-0 box-shadow-lg" style="width: 0%"></div>
+
+                    <!-- Step 1 -->
+                    <div class="step-item relative z-10 flex flex-col items-center gap-2 cursor-pointer group" onclick="goToStep(1)">
+                        <div class="step-circle w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center font-bold text-gray-500 dark:text-gray-400 shadow-sm active transition-all group-hover:border-blue-600">
+                            1
+                        </div>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 hidden sm:block transition-colors group-hover:text-blue-600">Product</span>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-item relative z-10 flex flex-col items-center gap-2 cursor-pointer group" onclick="goToStep(2)">
+                        <div class="step-circle w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center font-bold text-gray-500 dark:text-gray-400 shadow-sm transition-all group-hover:border-blue-600">
+                            2
+                        </div>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 hidden sm:block transition-colors group-hover:text-blue-600">Warranty</span>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-item relative z-10 flex flex-col items-center gap-2 cursor-pointer group" onclick="goToStep(3)">
+                        <div class="step-circle w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center font-bold text-gray-500 dark:text-gray-400 shadow-sm transition-all group-hover:border-blue-600">
+                            3
+                        </div>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 hidden sm:block transition-colors group-hover:text-blue-600">Details</span>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-item relative z-10 flex flex-col items-center gap-2 cursor-pointer group" onclick="goToStep(4)">
+                        <div class="step-circle w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center font-bold text-gray-500 dark:text-gray-400 shadow-sm transition-all group-hover:border-blue-600">
+                            4
+                        </div>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 hidden sm:block transition-colors group-hover:text-blue-600">Contact</span>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-item relative z-10 flex flex-col items-center gap-2 cursor-pointer group" onclick="goToStep(5)">
+                        <div class="step-circle w-10 h-10 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center font-bold text-gray-500 dark:text-gray-400 shadow-sm transition-all group-hover:border-blue-600">
+                            5
+                        </div>
+                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400 hidden sm:block transition-colors group-hover:text-blue-600">Schedule</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Content -->
+            <div class="p-6 md:p-10">
+                <form id="bookingForm"
+                      method="post" asp-action="ServiceBooking" asp-controller="Booking">
+
+                    @Html.AntiForgeryToken()
+                    <!-- Step 1: Product Selection -->
+                    <div class="form-step active" id="step1">
+                        <h2 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Select Your Product</h2>
+                        <p class="flex justify-between text-gray-500 dark:text-gray-400 mb-6">
+                            <span>Choose the appliance that needs repair</span>
+                             <a type="button" asp-action="ServiceBooking" asp-controller="Booking" class=" ml-auto px-8 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-600 shadow-lg hover:shadow-purple-500/30 transition transform hover:-translate-y-0.5">
+                            Refresh Form <i class="fa-solid fa-arrow-rotate-right ml-2"></i>
+                             </a>
+                        </p>
+
+                        <div class="space-y-6 max-w-lg">
+                            <div>
+                                
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Product Category *</label>
+                                <select id="productCategory" name="product_category" required onchange="handleProductChange()"
+                                        class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                    <option value="">-- Select Product Category --</option>
+                                    <option value="AC">Air Conditioner (AC)</option>
+                                    <option value="Refrigerator">Refrigerator</option>
+                                    <option value="WashingMachine">Washing Machine</option>
+                                    <option value="Microwave">Microwave</option>
+                                    <option value="TV">LED/LCD TV</option>
+                                    <option value="RO">RO Water Purifier</option>
+                                    <option value="Geyser">Geyser</option>
+                                    <option value="Treadmill">Treadmill</option>
+                                    <option value="Electrical">Electrical Work</option>
+                                </select>
+                                <div id="productError" class="text-red-500 text-xs mt-1 hidden">Product category is required.</div>
+                            </div>
+
+                            <div id="subCategoryGroup" class="">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sub Category *</label>
+                                <select id="subCategory" name="sub_category"
+                                        class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                    <option value="">-- Select Sub Category --</option>
+                                </select>
+                                <div id="subCategoryError" class="text-red-500 text-xs mt-1 hidden">Sub-category is required.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Warranty Status -->
+                    <div class="form-step" id="step2">
+                        <h2 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Warranty Status</h2>
+                        <p class="flex justify-between text-gray-500 dark:text-gray-400 mb-6">
+                            <span>Product warranty status</span>
+                            <a type="button" asp-action="ServiceBooking" asp-controller="Booking" class=" ml-auto px-8 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-600 shadow-lg hover:shadow-purple-500/30 transition transform hover:-translate-y-0.5">
+                                Refresh Form <i class="fa-solid fa-arrow-rotate-right ml-2"></i>
+                            </a>
+                        </p>
+
+                        <div class="space-y-4 max-w-lg mb-8">
+                            <label class="flex items-center p-4 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all group">
+                                <input type="radio" name="warranty_status" value="In Warranty" class="w-5 h-5 text-blue-600 focus:ring-blue-600">
+                                <span class="ml-3 font-medium text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">In Warranty</span>
+                            </label>
+                            <label class="flex items-center p-4 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all group">
+                                <input type="radio" name="warranty_status" value="Out of Warranty" class="w-5 h-5 text-blue-600 focus:ring-blue-600">
+                                <span class="ml-3 font-medium text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">Out of Warranty</span>
+                            </label>
+                            <label class="flex items-center p-4 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all group">
+                                <input type="radio" name="warranty_status" value="Dont Know" class="w-5 h-5 text-blue-600 focus:ring-blue-600">
+                                <span class="ml-3 font-medium text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">Don't Know</span>
+                            </label>
+                            <div id="warrantyError" class="text-red-500 text-xs mt-1 hidden">Please select warranty status.</div>
+                        </div>
+
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 p-4 rounded-xl flex gap-3 text-sm">
+                            <i class="fa-solid fa-circle-info text-blue-500 mt-0.5"></i>
+                            <div class="text-blue-800 dark:text-blue-200">
+                                <strong>Disclaimer:</strong> QuickService is independent. Not affiliated with any specific brand.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Brand & Issue Details -->
+                    <div class="form-step" id="step3">
+                        <h2 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Brand & Issue Details</h2>
+                        <p class="flex justify-between text-gray-500 dark:text-gray-400 mb-6">
+                            <span>Help us understand the issue</span>
+                            <a type="button" asp-action="ServiceBooking" asp-controller="Booking" class=" ml-auto px-8 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-600 shadow-lg hover:shadow-purple-500/30 transition transform hover:-translate-y-0.5">
+                                Refresh Form <i class="fa-solid fa-arrow-rotate-right ml-2"></i>
+                            </a>
+                        </p>
+
+                        <div class="space-y-6 max-w-lg">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Brand *</label>
+                                <select name="brand" id="brand" class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 transition-all dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                    <option value="">-- Select Brand --</option>
+                                    <option value="Samsung">Samsung</option>
+                                    <option value="LG">LG</option>
+                                    <option value="Whirlpool">Whirlpool</option>
+                                    <option value="Godrej">Godrej</option>
+                                    <option value="Voltas">Voltas</option>
+                                    <option value="Daikin">Daikin</option>
+                                    <option value="Hitachi">Hitachi</option>
+                                    <option value="Panasonic">Panasonic</option>
+                                    <option value="IFB">IFB</option>
+                                    <option value="Haier">Haier</option>
+                                    <option value="Others">Others</option>
+                                    <option value="Skip">Skip (Don't Know)</option>
+                                </select>
+                                <div id="brandError" class="text-red-500 text-xs mt-1 hidden">Brand is required.</div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Issue Type *</label>
+                                <select name="issue_type" id="issueType" class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 transition-all dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                    <option value="">-- Select Issue Type --</option>
+                                    <option value="Not Cooling">Not Cooling</option>
+                                    <option value="Noise Issue">Noise Issue</option>
+                                    <option value="Water Leakage">Water Leakage</option>
+                                    <option value="Not Turning On">Not Turning On</option>
+                                    <option value="Error Code">Error Code Displayed</option>
+                                    <option value="Service/Cleaning">General Service/Cleaning</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div id="issueTypeError" class="text-red-500 text-xs mt-1 hidden">Issue type is required.</div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Issue Description (Optional)</label>
+                                <textarea name="issue_description" rows="3" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 transition-all dark:text-white" placeholder="Describe the issue in detail..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Customer Information -->
+                    <div class="form-step" id="step4">
+                        <h2 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Customer Information</h2>                        
+                        <p class="flex justify-between text-gray-500 dark:text-gray-400 mb-6">
+                            <span>Contact details</span>
+                            <a type="button" asp-action="ServiceBooking" asp-controller="Booking" class=" ml-auto px-8 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-600 shadow-lg hover:shadow-purple-500/30 transition transform hover:-translate-y-0.5">
+                                Refresh Form <i class="fa-solid fa-arrow-rotate-right ml-2"></i>
+                            </a>
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name *</label>
+                                <input type="text" name="full_name" placeholder="Enter Full Name" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                <div id="nameError" class="text-red-500 text-xs mt-1 hidden">Name is required (min 3 chars).</div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number *</label>
+                                <input type="tel" name="phone_number" placeholder="Enter Contact Number" maxlength="10" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                <div id="phoneError" class="text-red-500 text-xs mt-1 hidden">Valid 10-digit number required.</div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Alternate Number <span class="text-gray-400 text-xs font-normal ml-1">(Optional)</span></label>
+                                <input type="tel" name="alt_phone_number" placeholder="Alternate Contact Number" maxlength="10" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                <div id="altPhoneError" class="text-red-500 text-xs mt-1 hidden">Invalid number format.</div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email <span class="text-gray-400 text-xs font-normal ml-1">(Optional)</span></label>
+                                <input type="email" name="email" placeholder="Email ID" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                <div id="emailError" class="text-red-500 text-xs mt-1 hidden">Invalid email format.</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Address *</label>
+                            <textarea name="address" rows="3" placeholder="Enter Your Address" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white mb-2"></textarea>
+                            <!-- <button type="button" onclick="useMyLocation()" class="text-blue-600 hover:text-blue-600 text-sm font-medium flex items-center transition-colors">
+                                <i class="fa-solid fa-location-crosshairs mr-2"></i> Use My Location
+                            </button> -->
+                            <div id="addressError" class="text-red-500 text-xs mt-1 hidden">Address is required > 10 chars.</div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City *</label>
+                                <select name="city" class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                  <option value="">-- Select City --</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Ranga Reddy">Ranga Reddy</option>
+                    <option value="Sanga Reddy">Sanga Reddy</option>
+                    <option value="Nizamabad">Nizamabad</option>
+                    <option value="Medak">Medak</option>
+                    <option value="Suryapet">Suryapet</option>
+                    <option value="Warangal">Warangal</option>
+                    <option value="Mulugu">Mulugu</option>
+                    <option value="Narayanpet">Narayanpet</option>
+                                </select>
+                                <div id="cityError" class="text-red-500 text-xs mt-1 hidden">City is required.</div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">PIN Code *</label>
+                                <input type="text" placeholder="Your Area Pincode" name="pin_code" maxlength="6" pattern="[0-9]{6}" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                <div id="pinError" class="text-red-500 text-xs mt-1 hidden">Valid 6-digit PIN required.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Schedule -->
+                    <div class="form-step" id="step5">
+                        <h2 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Schedule Service</h2>
+                        <p class="flex justify-between text-gray-500 dark:text-gray-400 mb-6">
+                            <span>Preferred timing</span>
+                            <a type="button" asp-action="ServiceBooking" asp-controller="Booking" class=" ml-auto px-8 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-600 shadow-lg hover:shadow-purple-500/30 transition transform hover:-translate-y-0.5">
+                                Refresh Form <i class="fa-solid fa-arrow-rotate-right ml-2"></i>
+                            </a>
+                        </p>
+
+                        <div class="space-y-6 max-w-2xl">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Priority (Optional)</label>
+                                <select name="priority" class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                    <option value="">-- Select Priority --</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Urgent">Urgent</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preferred Day *</label>
+                                    <select name="preferred_day" id="preferredDay" onchange="handleDayChange()" class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                        <option value="">-- Select Day --</option>
+                                        <option value="Today">Today</option>
+                                        <option value="Tomorrow">Tomorrow</option>
+                                        <option value="DayAfterTomorrow">Day After Tomorrow</option>
+                                        <option value="Custom">Custom Date</option>
+                                    </select>
+                                    <div id="dayError" class="text-red-500 text-xs mt-1 hidden">Please select a day.</div>
+                                </div>
+                                <div id="customDateGroup" class="hidden">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Date *</label>
+                                    <input type="date" name="custom_date" id="customDate" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                    <div id="customDateError" class="text-red-500 text-xs mt-1 hidden">Date is required.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Time Slot *</label>
+                                    <select name="time_slot" id="timeSlot"  class="custom-select w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white cursor-pointer hover:bg-white dark:hover:bg-gray-700">
+                                        <option value="">-- Select Time Slot --</option> @*onchange="handleTimeChange()"*@
+                                        <option value="Morning">Morning (9AM - 12PM)</option>
+                                        <option value="Afternoon">Afternoon (12PM - 4PM)</option>
+                                        <option value="Evening">Evening (4PM - 8PM)</option>
+                                        @* <option value="Specific">Specific Time</option> *@
+                                    </select>
+                                    <div id="timeError" class="text-red-500 text-xs mt-1 hidden">Please select a time slot.</div>
+                                </div>
+                                @* <div id="specificTimeGroup" class="hidden">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Time *</label>
+                                    <input type="time" name="specific_time" id="specificTime" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 dark:text-white">
+                                    <div id="specificTimeError" class="text-red-500 text-xs mt-1 hidden">Time is required.</div>
+                                </div> *@
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-gray-50 dark:bg-gray-800/80 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+                            <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Booking Summary</h3>
+                            <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                                <li class="flex justify-between"><span>Visit Charges:</span> <span class="font-medium text-blue-600" id="summaryCharge">Rs 150 - Rs 250</span></li>
+                            </ul>
+                            <div class="mt-4 space-y-1 text-xs text-gray-500 italic">
+                                <p>* +Rs 100 for outer areas</p>
+                                <p>* Charges vary by appliance type and area. Final quote after inspection.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="flex items-start gap-3 cursor-pointer group">
+                                <input type="checkbox" name="terms_accepted" id="terms" class="mt-1 w-4 h-4 text-blue-600 rounded border-gray-300 dark:border-gray-600 focus:ring-blue-600">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">I agree to the <a asp-action="TermsAndConditions" asp-controller="About" class="text-blue-600 hover:underline">Terms & Conditions</a></span>
+                            </label>
+                            <div id="termsError" class="text-red-500 text-xs mt-1 hidden">You must agree to the terms.</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mt-10 flex justify-between pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <button type="button" id="prevBtn" onclick="prevStep()" class="px-8 py-3 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition hidden">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+                        </button>
+                        <button type="button" id="nextBtn" onclick="nextStep()" class="ml-auto px-10 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-600 shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">
+                            Next <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                        <button id="submitBtn" type="submit" class="ml-auto px-10 py-3 rounded-full bg-green-600 text-white font-medium hover:bg-green-600 shadow-lg hover:shadow-green-500/30 transition transform hover:-translate-y-0.5 hidden">
+                            Book Service <i class="fa-solid fa-check ml-2"></i>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal -->
+@* <div id="visitFeesModal" class="modal flex items-center justify-center p-4">
+    <div class="modal-content bg-white dark:bg-gray-900 w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Why visit fees?</h3>
+        <div class="modal-body space-y-3 text-sm text-gray-600 dark:text-gray-300">
+            <div class="flex gap-3"><i class="fa-solid fa-user-tie text-blue-600 mt-1"></i><div><strong>Expert Assessment</strong></div></div>
+            <div class="flex gap-3"><i class="fa-solid fa-gas-pump text-blue-600 mt-1"></i><div><strong>Travel Costs</strong></div></div>
+            <button onclick="closeModal()" class="w-full mt-6 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 font-medium">Got it</button>
+        </div>
+    </div>
+</div> *@
+ 

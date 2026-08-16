@@ -1,0 +1,1242 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Core -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@(ViewData["Title"] ?? "QuickService")</title>
+    <meta name="description" content="@(ViewData["Description"] ?? "Appliance repair service")" />
+    @* @await RenderSectionAsync("Head", required: false) *@
+
+    <!-- Global meta -->
+    <meta name="author" content="@SiteData.CompanyName" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="generator" content="ASP.NET Core MVC" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="@(ViewData["Canonical"] ?? $"{SiteData.SiteUrl}{Context.Request.Path}")" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="@SiteData.CompanyName" />
+    <meta property="og:title" content="QuickService – Home Appliance Repair & Service" />
+    <meta property="og:description" content="Book trusted appliance repair services at home. AC, Refrigerator, Washing Machine, RO & more." />
+    <meta property="og:url" content="@($"{SiteData.SiteUrl}/")" />
+    <meta property="og:image" content="@($"{SiteData.SiteUrl}/icons/og-home.png")" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QuickService – Home Appliance Repair & Service" />
+    <meta name="twitter:description" content="Fast & trusted appliance repair service. Book online now." />
+    <meta name="twitter:image" content="@($"{SiteData.SiteUrl}/icons/og-home.png")" />
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "LocalBusiness",
+          "name": "@SiteData.CompanyName",
+          "image": "@($"{SiteData.SiteUrl}/icons/og-home.png")",
+          "logo": "@($"{SiteData.SiteUrl}/icons/icon-384.png")",
+          "url": "@SiteData.SiteUrl",
+          "telephone": "@SiteData.OwnerPhone",
+          "description": "Home appliance repair service platform offering AC, Refrigerator, Washing Machine, RO, TV repair services."
+          "priceRange": "₹199-₹3000",
+          "openingHours": "Mo-Su 08:00-21:00",
+          "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "@SiteData.OwnerPhone",
+            "contactType": "customer support",
+            "areaServed": "IN"
+          },
+          "address": {
+            "@@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500001",
+            "addressCountry": "IN"
+          },
+          "areaServed": {
+            "@@type": "Country",
+            "name": "India"
+          },
+          "sameAs": @Html.Raw(JsonSerializer.Serialize(SiteData.SameAs))
+        }
+    </script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="384x384" href="~/icons/icon-384.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="~/icons/icon-48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/icons/apple-icon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="~/icons/icon-512.png">
+    <link rel="manifest" href="~/applicationManifest.json">
+    <meta name="theme-color" content="#175a91">
+
+    <!-- CSS -->
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <!-- Fonts & icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Inline styles -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar-thumb {
+            background: linear-gradient(to right, #38bdf8, #6366f1);
+            border-radius: 20px;
+        }
+
+            .scrollbar-hide::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(to right, #22d3ee, #818cf8);
+            }
+
+        .scrollbar-hide {
+            scrollbar-width: thin;
+            scrollbar-color: #6366f1 transparent;
+        }
+
+        .form-label {
+            @@apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2;
+        }
+
+        .form-input {
+            @@apply w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200;
+        }
+   
+    </style>
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+    <body class="font-sans antialiased text-gray-800 bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-slate-900 dark:text-gray-200 transition-colors duration-500 selection:bg-blue-500 selection:text-white">
+
+        <!-- Top Disclaimer -->
+        <div id="disclaimer" class="bg-gray-900 text-white text-sm py-1.5 text-center px-4 relative z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <p class="opacity-90 flex-1 text-center">
+                <i class="fa-solid fa-circle-info mr-2 text-blue-500"></i>
+                <span class="hidden sm:inline text-xs lg:text-sm font-semibold">Transparency Notice:</span> We are an
+                independent third-party service provider & not affiliated with any specific brand.
+            </p>
+        </div>
+    </div>
+
+        <!-- NAVBAR -->
+        <nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm border-b border-gray-200/50 dark:border-gray-800/50 sticky top-0 z-[100] transition-all duration-300 supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    
+                    <a href="/" class="flex items-center gap-2">
+                         <div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 dark:text-cyan-400">
+                            <i class="fa-solid fa-wrench text-xl"></i>
+                        </div>
+                        <span class="font-bold text-2xl xl:text-[22px] text-gray-900 dark:text-white">
+                            Quick<span class="text-blue-600 dark:text-cyan-400">Service</span>
+                        </span> 
+                    </a>
+                    @* <a href="/">
+                        <!-- Light Mode Logo -->
+                        <img src="~/icons/QuickServiceLogo.png" alt="QuickService"
+                             class="block dark:hidden w-54 sm:w-56 lg:w-66 xl:w-72" />
+
+                        <!-- Dark Mode Logo -->
+                        <img src="~/icons/QuickServiceLogo_White.png" alt="QuickService"
+                             class="hidden dark:block w-54 sm:w-56 lg:w-66 xl:w-72" />
+                    </a> *@
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-5 lg:gap-8">
+
+                    <!-- Home -->
+                    <a href="/"
+                       class="text-gray-800 font-medium dark:text-gray-300 hover:text-blue-600 dark:hover:text-cyan-400">
+                        Home
+                    </a>
+
+                    <!-- ================= SERVICES DROPDOWN ================= -->
+                    <div class="relative h-full flex items-center" id="servicesDropdown">
+
+                        <!-- Button -->
+                        <button class="relative z-50 flex items-center gap-1 text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-cyan-400 font-medium
+                            h-full border-b-2 border-transparent hover:border-blue-600 transition-all duration-300" id="servicesBtn" type="button">
+                            Services
+                            <i id="servicesIcon" class="fa-solid fa-chevron-down text-[11px] ml-1 transition-transform duration-300"></i>
+                            @* group-hover/services:rotate-180*@
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-80 max-h-[calc(100vh-100px)] opacity-0 invisible
+                            translate-y-2 transition-all duration-300 z-40" id="servicesMenu">
+                            @* group-hover/services:opacity-100 group-hover/services:visible group-hover/services:translate-y-0 *@
+
+                            <!-- hover bridge -->
+                            <div class="h-4"></div>
+
+                            <!-- Scrollable container -->
+                            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl
+                                    border border-gray-100 dark:border-gray-800
+                                    max-h-[75vh] overflow-y-auto overscroll-contain scrollbar-hide">
+
+                                <div class="flex flex-col p-5 space-y-2.5">
+
+                                    <!-- VIEW ALL SERVICES (TOP) -->
+                                    <a asp-action="Services" asp-controller="Services"
+                                       class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-900 dark:text-white font-semibold">
+                                        <span class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/40 flex items-center justify-center">
+                                            <i class="fa-solid fa-list"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Our Services</span>
+                                            <span class="block text-xs text-gray-500">Visit Services Page</span>
+                                        </div>
+                                    </a>
+                                    <hr class="border-gray-200 dark:border-gray-700">
+                                    <!-- AC -->
+                                        <a asp-action="AcRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-snowflake"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">AC Repair</span>
+                                            <span class="block text-xs text-gray-500">Service, Gas, Installation</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Refrigerator -->
+                                        <a asp-action="RefrigeratorRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-temperature-low"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Refrigerator Repair</span>
+                                            <span class="block text-xs text-gray-500">Double Door, Inverter</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Washing Machine -->
+                                        <a asp-action="WashingMachineRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-yellow-50 dark:hover:bg-yellow-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900/40 text-yellow-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-shirt"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Washing Machine</span>
+                                            <span class="block text-xs text-gray-500">Front & Top Load</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Microwave -->
+                                        <a asp-action="MicrowaveRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-fire"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Microwave Repair</span>
+                                            <span class="block text-xs text-gray-500">Oven, Convection</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- LED TV -->
+                                        <a asp-action="LedTvRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-tv"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">LED TV Repair</span>
+                                            <span class="block text-xs text-gray-500">Display & Audio</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Geyser -->
+                                        <a asp-action="GeyserRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/40 text-orange-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-temperature-high"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Geyser Repair</span>
+                                            <span class="block text-xs text-gray-500">Heating Issues</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- RO -->
+                                        <a asp-action="RoPurifierRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-cyan-100 dark:bg-cyan-900/40 text-cyan-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-droplet"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">RO Water Purifier</span>
+                                            <span class="block text-xs text-gray-500">Filter Change, Service</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Treadmill -->
+                                        <a asp-action="TreadmillRepair" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/40 text-orange-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-person-running"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Treadmill Repair</span>
+                                            <span class="block text-xs text-gray-500">Belt, Motor, PCB</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Electrical -->
+                                        <a asp-action="ElectricalWork" asp-controller="Services"
+                                       class="flex items-center gap-4 px-4 py-2.5 rounded-lg hover:bg-yellow-50 dark:hover:bg-yellow-900/20">
+                                        <span class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-bolt"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Electrical Work</span>
+                                            <span class="block text-xs text-gray-500">Wirings, Switches</span>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ================= ABOUT DROPDOWN ================= -->
+                    <div class="relative h-full flex items-center" id="aboutDropdown">
+
+                        <!-- Button -->
+                        <button class="relative z-50 flex items-center gap-1 text-gray-800 dark:text-gray-100
+                    hover:text-blue-600 dark:hover:text-cyan-400 font-medium h-full border-b-2 border-transparent hover:border-blue-600
+                    transition-all duration-300" id="aboutBtn" type="button">
+                            About Us
+                            <i id="aboutIcon" class="fa-solid fa-chevron-down text-[10px] ml-1 transition-transform"></i>
+                            @* group-hover/about:rotate-180 *@
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-80 max-h-[calc(100vh-120px)] opacity-0 invisible translate-y-2
+                                     transition-all duration-300 z-40" id="aboutMenu">
+                        @* group-hover/about:opacity-100 group-hover/about:visible group-hover/about:translate-y-0 *@
+
+                            <!-- hover bridge -->
+                            <div class="h-4"></div>
+
+                            <!-- Scrollable container -->
+                            <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg
+                         border border-gray-100 dark:border-gray-800
+                         max-h-[65vh] overflow-y-auto overscroll-contain scrollbar-hide">
+
+                                <div class="flex flex-col p-4 space-y-2">
+
+                                    <!-- About Us -->
+                                        <a asp-action="About" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                                    hover:bg-blue-50 dark:hover:bg-blue-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-900/40
+                                 text-blue-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-user"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">About Us</span>
+                                            <span class="block text-xs text-gray-500">Who we are</span>
+                                        </div>
+                                    </a>
+                                    <hr class="border-gray-200 dark:border-gray-700">
+
+                                    <!-- contact -->
+                                        <a asp-action="ContactUs" asp-controller="About" class="lg:hidden flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-pink-50 dark:hover:bg-pink-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-pink-100 dark:bg-pink-900/40
+                                 text-pink-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Contact Us</span>
+                                            <span class="block text-xs text-gray-500">Get in touch</span>
+                                        </div>
+                                    </a>
+                                    <hr class="lg:hidden border-gray-200 dark:border-gray-700">
+
+                                    <!-- Our Story -->
+                                        <a asp-action="OurStory" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-purple-50 dark:hover:bg-purple-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-purple-100 dark:bg-purple-900/40
+                                 text-purple-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-book-open"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Our Story</span>
+                                            <span class="block text-xs text-gray-500">How we started</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Mission -->
+                                        <a asp-action="MissionVision" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-green-50 dark:hover:bg-green-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/40
+                                 text-green-600 flex items-center justify-center">
+                                            <i class="fa-solid fa-bullseye"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Mission & Vision</span>
+                                            <span class="block text-xs text-gray-500">Our goals & values</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Why Choose Us -->
+                                        <a asp-action="WhyChooseUs" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-yellow-100 dark:bg-yellow-900/40
+                                 text-yellow-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-star"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Why Choose Us</span>
+                                            <span class="block text-xs text-gray-500">Our strengths</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Pricing -->
+                                        <a asp-action="Pricing" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-cyan-100 dark:bg-cyan-900/40
+                                 text-cyan-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-tags"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Pricing</span>
+                                            <span class="block text-xs text-gray-500">Transparent rates</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- FAQ -->
+                                        <a asp-action="FrequentlyAskedQuestion" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-red-50 dark:hover:bg-red-900/20 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/40
+                                 text-red-500 flex items-center justify-center">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">FAQ</span>
+                                            <span class="block text-xs text-gray-500">Common questions</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Privacy -->
+                                        <a asp-action="PrivacyPolicy" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-gray-200 dark:bg-gray-700
+                                 text-gray-700 dark:text-gray-200 flex items-center justify-center">
+                                            <i class="fa-solid fa-shield-halved"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Privacy Policy</span>
+                                            <span class="block text-xs text-gray-500">Your data safety</span>
+                                        </div>
+                                    </a>
+
+                                    <!-- Terms -->
+                                        <a asp-action="TermsAndConditions" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                          hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                                        <span class="w-9 h-9 rounded-lg bg-gray-200 dark:bg-gray-700
+                                 text-gray-700 dark:text-gray-200 flex items-center justify-center">
+                                            <i class="fa-solid fa-file-contract"></i>
+                                        </span>
+                                        <div>
+                                            <span class="block font-semibold">Terms & Conditions</span>
+                                            <span class="block text-xs text-gray-500">Legal terms</span>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Contact -->
+                        <a asp-action="ContactUs" asp-controller="About"
+                       class="hidden lg:block text-gray-800 font-medium dark:text-gray-300 hover:text-blue-600 dark:hover:text-cyan-400">
+                        Contact
+                    </a>
+
+                    <button onclick="toggleDarkMode()"
+                            class="relative w-10 h-10 rounded-full
+         bg-gray-100 dark:bg-gray-800
+         text-gray-600 dark:text-yellow-300
+         flex items-center justify-center">
+
+                        <!-- Moon (light mode) -->
+                        <i class="fa-solid fa-moon absolute
+            opacity-100 dark:opacity-0
+            transition-opacity duration-200"></i>
+
+                        <!-- Sun (dark mode) -->
+                        <i class="fa-solid fa-sun absolute
+            opacity-0 dark:opacity-100
+            transition-opacity duration-200"></i>
+
+                    </button>
+
+
+
+                    <!-- CTA -->
+                        <a asp-action="ServiceBooking" asp-controller="Booking" class="bg-gradient-to-r from-blue-600 to-purple-700
+              text-white text-sm lg:text-base px-6 py-2 rounded-full font-medium shadow-lg hover:scale-105 transition">
+                        Book Repair Online
+                    </a>
+                </div>
+
+
+
+                <!-- Dark/Light -->
+                <div class="md:hidden flex items-center gap-6 me-4 sm:me-8">
+
+                    <!-- Mobile -->
+                    <!-- CTA -->
+                        <a asp-action="ServiceBooking" asp-controller="Booking" class="hidden sm:block md:hidden bg-gradient-to-r from-blue-600 to-purple-700
+              text-white text-sm lg:text-base px-6 py-2 rounded-full font-medium shadow-lg hover:scale-105 transition">
+                        Book Repair Online
+                    </a>
+
+                    <button onclick="toggleDarkMode()"
+                            class="relative w-10 h-10 rounded-full
+         bg-gray-100 dark:bg-gray-800
+         text-gray-600 dark:text-yellow-300
+         flex items-center justify-center">
+
+                        <!-- Moon (light mode) -->
+                        <i class="fa-solid fa-moon absolute
+            opacity-100 dark:opacity-0
+            transition-opacity duration-200"></i>
+
+                        <!-- Sun (dark mode) -->
+                        <i class="fa-solid fa-sun absolute
+            opacity-0 dark:opacity-100
+            transition-opacity duration-200"></i>
+
+                    </button>
+
+                    <!-- Mobile -->
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu(event)" class="text-gray-600 dark:text-gray-300">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+        <!-- MOBILE MENU (FIXED POSITION + ANIMATION) -->
+        <div id="mobileMenu"
+         class="md:hidden hidden fixed left-0 w-full
+            bg-white dark:bg-gray-900 pb-1
+            border-t border-gray-200 dark:border-gray-700
+            text-center
+            opacity-0 -translate-y-3
+            transition-all duration-300 ease-out
+        z-[9999] scrollbar-hide
+        overflow-y-auto max-h-[calc(75vh-80px)]">
+
+        <a href="/"
+           class="flex mt-2 justify-center px-6 py-3 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 border-b border-gray-100 dark:border-gray-800">
+            Home
+        </a>
+
+        <!-- Services Mobile Dropdown -->
+        <details class="group border-b border-gray-100 dark:border-gray-800">
+            <summary class="flex justify-center gap-3 items-center px-6 py-4 text-gray-800 dark:text-gray-100 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer list-none transition-colors">
+                <span class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                        <i class="fa-solid fa-screwdriver-wrench text-sm"></i>
+                    </span>
+                    Services
+                </span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+            </summary>
+
+
+            <div class="bg-gray-50/50 dark:bg-slate-800/30 pb-4 px-4 flex flex-col items-center gap-2 max-h-[calc(50vh-80px)] 
+                overflow-y-auto scrollbar-hide"> @* overscroll-contain *@
+
+                <!-- VIEW ALL SERVICES (TOP) -->
+                    <a asp-action="Services" asp-controller="Services"
+                   class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-900 dark:text-white font-semibold">
+                    <span class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/40 flex items-center justify-center">
+                        <i class="fa-solid fa-list"></i>
+                    </span>
+                    <div>
+                        <span class="block font-semibold">Our Services</span>
+                        <span class="block text-xs text-gray-500">Visit Services Page</span>
+                    </div>
+                </a>
+
+                <!-- AC -->
+                    <a asp-action="AcRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-blue-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-snowflake text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">AC Repair</span>
+                        <span class="block text-[10px] text-gray-500">Service, Gas, Install</span>
+                    </div>
+                </a>
+
+                <!-- Washing Machine -->
+                    <a asp-action="WashingMachineRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-yellow-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-yellow-100 dark:bg-yellow-900/40 text-yellow-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-shirt text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Washing Machine</span>
+                        <span class="block text-[10px] text-gray-500">Front & Top Load</span>
+                    </div>
+                </a>
+
+                <!-- Refrigerator -->
+                    <a asp-action="RefrigeratorRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-green-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-600 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-temperature-low text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Refrigerator</span>
+                        <span class="block text-[10px] text-gray-500">Double Door, Inverter</span>
+                    </div>
+                </a>
+
+                <!-- Microwave -->
+                    <a asp-action="MicrowaveRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-red-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-fire text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Microwave</span>
+                        <span class="block text-[10px] text-gray-500">Oven, Convection</span>
+                    </div>
+                </a>
+
+                <!-- TV -->
+                    <a asp-action="LedTvRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-purple-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-tv text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">LED TV Repair</span>
+                        <span class="block text-[10px] text-gray-500">Display & Audio</span>
+                    </div>
+                </a>
+
+                <!-- Geyser -->
+                    <a asp-action="GeyserRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-orange-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/40 text-orange-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-temperature-high text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Geyser Repair</span>
+                        <span class="block text-[10px] text-gray-500">Heating Issues</span>
+                    </div>
+                </a>
+
+                <!-- RO -->
+                    <a asp-action="RoPurifierRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-cyan-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-cyan-100 dark:bg-cyan-900/40 text-cyan-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-droplet text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">RO Purifier</span>
+                        <span class="block text-[10px] text-gray-500">Filter Change</span>
+                    </div>
+                </a>
+
+                <!-- Treadmill -->
+                    <a asp-action="TreadmillRepair" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-orange-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/40 text-orange-600 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-person-running text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Treadmill</span>
+                        <span class="block text-[10px] text-gray-500">Belt, Motor</span>
+                    </div>
+                </a>
+
+                <!-- Electrical -->
+                    <a asp-action="ElectricalWork" asp-controller="Services"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-yellow-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Electrical</span>
+                        <span class="block text-[10px] text-gray-500">Wirings, Switches</span>
+                    </div>
+                </a>
+
+            </div>
+        </details>
+
+        <!-- About Mobile Dropdown -->
+        <details class="group border-b border-gray-100 dark:border-gray-800">
+            <summary class="flex justify-center gap-3 items-center px-6 py-4 text-gray-800 dark:text-gray-100 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer list-none transition-colors">
+                <span class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
+                        <i class="fa-solid fa-user text-sm"></i>
+                    </span>
+                    About
+                </span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+            </summary>
+
+            <div class="bg-gray-50/50 dark:bg-slate-800/30 pb-4 px-4 flex flex-col items-center gap-2 max-h-[calc(50vh-80px)]
+                overflow-y-auto scrollbar-hide"> @* overscroll-contain *@
+
+                <!-- About Us -->
+                <a asp-action="About" asp-controller="About" class="flex items-center gap-3 px-3 py-2 rounded-lg
+                                    hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition">
+                    <span class="w-9 h-9 rounded-lg bg-emerald-100 dark:bg-emerald-900/40
+                                 text-emerald-500 flex items-center justify-center">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+                    <div>
+                        <span class="block font-semibold">About Us</span>
+                        <span class="block text-xs text-gray-500">Who we are</span>
+                    </div>
+                </a>
+
+                <!-- Story -->
+                    <a asp-action="OurStory" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-purple-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-book-open text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Our Story</span>
+                        <span class="block text-[10px] text-gray-500">How we started</span>
+                    </div>
+                </a>
+
+                <!-- Mission -->
+                    <a asp-action="MissionVision" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-green-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-600 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullseye text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Mission</span>
+                        <span class="block text-[10px] text-gray-500">Goals & Values</span>
+                    </div>
+                </a>
+
+                <!-- Pricing -->
+                    <a asp-action="Pricing" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-cyan-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-cyan-100 dark:bg-cyan-900/40 text-cyan-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-tags text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Pricing</span>
+                        <span class="block text-[10px] text-gray-500">Transparent rates</span>
+                    </div>
+                </a>
+
+                <!-- FAQ -->
+                    <a asp-action="FrequentlyAskedQuestion" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-red-100 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-500 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-circle-question text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">FAQ</span>
+                        <span class="block text-[10px] text-gray-500">Common Questions</span>
+                    </div>
+                </a>
+
+                <!-- Privacy -->
+                    <a asp-action="PrivacyPolicy" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-gray-200 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-100 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Privacy Policy</span>
+                        <span class="block text-[10px] text-gray-500">Data Safety</span>
+                    </div>
+                </a>
+
+                <!-- Terms -->
+                    <a asp-action="TermsAndConditions" asp-controller="About"
+                   class="flex items-center gap-3 px-6 py-3 rounded-lg hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm border border-transparent hover:border-gray-200 dark:hover:border-slate-700 transition-all group/item">
+                    <span class="w-8 h-8 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-100 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                        <i class="fa-solid fa-file-contract text-sm"></i>
+                    </span>
+                    <div>
+                        <span class="block text-sm font-semibold text-gray-800 dark:text-gray-200">Terms</span>
+                        <span class="block text-[10px] text-gray-500">Conditions</span>
+                    </div>
+                </a>
+
+            </div>
+        </details>
+
+            <a asp-action="ContactUs" asp-controller="About"
+           class="flex mt-2 justify-center px-6 py-3 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 sm:border-none border-b border-gray-100 dark:border-gray-800">
+            Contact Us
+        </a>
+
+        <div class="block sm:hidden px-6 py-4">
+                <a asp-action="ServiceBooking" asp-controller="Booking"
+               class="inline-block mx-auto px-10 py-2 bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
+                Book Repair Online
+            </a>
+        </div>
+    </div>
+     
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 dark:bg-gray-950 text-white border-t border-gray-800">
+        <!-- New Dedicated Social Connect Section -->
+        <div class="border-b border-gray-800 bg-gray-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
+                    <div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Connect With Us</h4>
+                        <p class="text-gray-400">Join our community for tips and updates</p>
+                    </div> 
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-center">
+                        <a href="tel:+919648703048"
+                           class="flex items-center gap-3 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-full hover:bg-white/20 transition-all duration-300 group shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                            <i class="fa-solid fa-phone-volume text-xl text-green-400 group-hover:animate-pulse"></i>
+                            <span class="font-semibold text-white">Call Now</span>
+                        </a>
+                        <a href="https://wa.me/919648703048" target="_blank"
+                           class="flex items-center gap-3 px-6 py-3 bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] rounded-full hover:bg-[#25D366] hover:text-white transition-all duration-300 group">
+                            <div class="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center group-hover:bg-white group-hover:text-[#25D366] transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-white">WhatsApp</span>
+                        </a>
+                        <a href="@SiteData.FacebookUrl" target="_blank"
+                           class="flex items-center gap-3 px-6 py-3 bg-[#1877F2]/10 border border-[#1877F2]/30 text-[#1877F2] rounded-full hover:bg-[#1877F2] hover:text-white transition-all duration-300 group">
+                            <div class="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center group-hover:bg-white group-hover:text-[#1877F2] transition">
+                                <i class="fa-brands fa-facebook-f text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-white">Facebook</span>
+                        </a>
+                        <a href="@SiteData.InstagramUrl" target="_blank"
+                           class="flex items-center gap-3 px-6 py-3 bg-[#E4405F]/10 border border-[#E4405F]/30 text-[#E4405F] rounded-full hover:bg-[#E4405F] hover:text-white transition-all duration-300 group">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center group-hover:bg-white group-hover:text-white transition">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-white">Instagram</span>
+                        </a>
+                        <a href="@SiteData.YoutubeUrl" target="_blank"
+                           class="flex items-center gap-3 px-6 py-3 bg-[#FF0000]/10 border border-[#FF0000]/30 text-[#FF0000] rounded-full hover:bg-[#FF0000] hover:text-white transition-all duration-300 group">
+                            <div class="w-8 h-8 rounded-full bg-[#FF0000] text-white flex items-center justify-center group-hover:bg-white group-hover:text-[#FF0000] transition">
+                                <i class="fa-brands fa-youtube text-lg"></i>
+                            </div>
+                            <span class="font-semibold text-white">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Col 1: Brand -->
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
+                        <div class="w-8 h-8 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-cyan-400 rounded-full flex items-center justify-center ">
+                            <i class="fa-solid fa-wrench text-sm"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight">
+                            Appliance<span class="text-cyan-500">Care</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 px-2 md:px-4 lg:px-0">
+                        QuickService is your trusted partner for all
+                        home appliance repairs, built on the core values of trust, transparency, and timely service at your
+                        doorstep.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a asp-action="Index" asp-controller="Home" class="hover:text-blue-600 transition">Home</a></li>
+                        <li>
+                            <a asp-action="Services" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Our Services</a>
+                        </li>
+                        <li>
+                            <a asp-action="About" asp-controller="About"
+                               class="hover:text-blue-600 transition">About Us</a>
+                        </li>
+                        <li>
+                            <a asp-action="ContactUs" asp-controller="About"
+                               class="hover:text-blue-600 transition">Contact Us</a>
+                        </li>
+                        <li>
+                            <a asp-action="FrequentlyAskedQuestion" asp-controller="About"
+                               class="hover:text-blue-600 transition">Frequently Asked Questions</a>
+                        </li>
+                        <li>
+                            <a asp-action="PrivacyPolicy" asp-controller="About"
+                               class="hover:text-blue-600 transition">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a asp-action="TermsAndConditions" asp-controller="About"
+                               class="hover:text-blue-600 transition">Terms & Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Services -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Services</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li>
+                            <a asp-action="AcRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">AC Repair</a>
+                        </li>
+                        <li>
+                            <a asp-action="ElectricalWork" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Electrical Work</a>
+                        </li>
+                        <li>
+                            <a asp-action="GeyserRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Geyser Repair </a>
+                        </li>
+                        <li>
+                            <a asp-action="LedTvRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">LED TV Repair</a>
+                        </li>
+                        <li>
+                            <a asp-action="MicrowaveRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Microwave Repair</a>
+                        </li>
+                        <li>
+                            <a asp-action="RefrigeratorRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Refrigerator Repair</a>
+                        </li>
+                        <li>
+                            <a asp-action="RoPurifierRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">RO Purifier Service</a>
+                        </li>
+                        <li>
+                            <a asp-action="TreadmillRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Treadmill Repair</a>
+                        </li>
+                        <li>
+                            <a asp-action="WashingMachineRepair" asp-controller="Services"
+                               class="hover:text-blue-600 transition">Washing Machine Repair</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Contact Info</h4>
+                    <div class="flex md:block justify-center">
+                        <ul class="space-y-4 text-gray-400 text-sm">
+                           
+                            <li class="flex items-start gap-3">
+                                @* <a href=""> *@
+                                <i class="fa-solid fa-location-dot mt-1 text-blue-600"></i>
+                                <span>@SiteData.CompanyAddress</span>
+                                @* </a> *@
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <a href="tel:+919648703048"
+                                   class="flex items-center gap-3 hover:text-blue-600 transition">
+                                    <i class="fa-solid fa-phone text-blue-600"></i>
+                                    <span>+91 96487 03048</span>
+                                </a>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <a href="mailto:diamond.enterprises.6226@gmail.com"
+                                   class="flex items-center gap-3 hover:text-blue-600 transition break-all">
+                                    <i class="fa-solid fa-envelope text-blue-600"></i>
+                                    <span>diamond.enterprises.6226@gmail.com</span>
+                                </a>
+                            </li>
+                            <li class="mt-4 flex-col">
+                                <a href="https://wa.me/919648703048"
+                                   class="w-full inline-block text-center bg-blue-600 hover:bg-blue-600 text-white px-8 py-2 rounded-lg font-medium transition w-full">
+                                    <i class="fa-solid fa-headset mr-2"></i> Support 24/7
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; <span id="currentYear"></span> QuickService Repair Services. All rights reserved.</p>
+                <div class="mt-2 space-x-4">
+                    <a asp-action="PrivacyPolicy" asp-controller="About"
+                       class="hover:text-blue-600 transition">Privacy Policy</a>
+                    <span class="text-gray-700">|</span>
+                    <a asp-action="TermsAndConditions" asp-controller="About" class="hover:text-blue-600 transition">
+                        Terms & Conditions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="hidden md:flex fixed bottom-6 right-6 flex-col gap-6 z-50">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/919648703048" target="_blank"
+           class="w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300 hover:shadow-green-500/50 relative group">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            <div class="absolute right-16 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                WhatsApp
+            </div>
+        </a>
+
+        <!-- Call -->
+        <a href="tel:+919648703048"
+           class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300 hover:shadow-blue-500/50 animate-bounce group"
+           style="animation-duration: 3s;">
+            <i class="fa-solid fa-phone text-xl"></i>
+            <div class="absolute right-16 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Call Us
+            </div>
+        </a>
+    </div>
+
+
+    <!-- MOBILE GLOSSY BOTTOM BAR -->
+    <div class="fixed bottom-3 left-1/2 -translate-x-1/2
+         z-[9999] md:hidden
+         w-[96%]">
+
+        <!-- Glass Card - Premium Finish -->
+        <div class="relative backdrop-blur-3xl
+           bg-white/80 dark:bg-gray-950/80
+           border border-white/40 dark:border-gray-800/60
+           shadow-[0_8px_32px_rgba(0,0,0,0.12)]
+           rounded-2xl px-3 py-2">
+
+            <!-- Items -->
+            <div class="grid grid-cols-5 gap-1 relative">
+
+                <!-- CALL (PRIMARY) -->
+                <a href="tel:+919648703048" class="group flex flex-col items-center justify-center gap-1
+                text-[11px] sm:text-xs font-semibold text-gray-800 dark:text-gray-300">
+                    <span class="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                 bg-gradient-to-br from-teal-500 to-cyan-600
+                 flex items-center justify-center
+                 shadow-xl shadow-teal-500/40
+                 group-active:scale-90 transition-all duration-200 ">
+
+                        <!-- pulse -->
+                        <span class="absolute inset-0 rounded-full
+                 bg-teal-400/30">
+                        </span>
+
+                        <i class="fa-solid fa-phone-volume text-gray-50 text-lg sm:text-xl animate-pulse group"
+                           style="animation-duration: 1500ms;"></i>
+                    </span>
+                    Call
+                </a>
+
+                <!-- CHAT -->
+                <a href="https://wa.me/919648703048" class="group flex flex-col items-center justify-center gap-1
+                text-[11px] sm:text-xs font-semibold text-gray-700 dark:text-gray-300">
+                    <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                 bg-emerald-500
+                 flex items-center justify-center
+                 shadow-lg backdrop-blur
+                 group-hover:scale-105 group-active:scale-90
+                 transition-all">
+                        <i class="fa-brands fa-whatsapp text-gray-100 text-2xl"></i>
+                    </span>
+                    Chat
+                </a>
+
+                <!-- SERVICES -->
+                <a asp-action="Services" asp-controller="Services" class="group flex flex-col items-center justify-center gap-1
+                text-[11px] sm:text-xs font-semibold text-gray-700 dark:text-gray-300">
+                    <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                 bg-gradient-to-br from-purple-600 to-indigo-700
+                 flex items-center justify-center
+                 shadow-lg backdrop-blur
+                 group-hover:scale-105 group-active:scale-90
+                 transition-all">
+                        <i class="fa-solid fa-screwdriver-wrench text-gray-100 text-xl"></i>
+                    </span>
+                    Services
+                </a>
+
+                <!-- FAQ -->
+                <a asp-action="FrequentlyAskedQuestion" asp-controller="About" class="group flex flex-col items-center justify-center gap-1
+                text-[11px] sm:text-xs font-medium text-gray-700 dark:text-gray-300">
+                    <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                 bg-gradient-to-br from-orange-600 to-pink-600
+                 flex items-center justify-center
+                 shadow-lg backdrop-blur
+                 group-hover:scale-105 group-active:scale-90
+                 transition-all">
+                        <i class="fa-solid fa-circle-question text-gray-100 text-xl sm:text-2xl"></i>
+                    </span>
+                    FAQ
+                </a>
+
+                <!-- BOOK -->
+                <a asp-action="ServiceBooking" asp-controller="Booking" class="group flex flex-col items-center justify-center gap-1
+                text-[11px] sm:text-xs font-medium text-gray-700 dark:text-gray-300">
+                    <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                 bg-gradient-to-br from-purple-600 to-indigo-700
+                 flex items-center justify-center
+                 shadow-lg backdrop-blur
+                 group-hover:scale-105 group-active:scale-90
+                 transition-all">
+                        <i class="fa-solid fa-calendar-days text-gray-100 text-xl"></i>
+                    </span>
+                    Book
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.getElementById('mobileMenuBtn');
+
+        function toggleMobileMenu(e) {
+            e.stopPropagation();
+
+            const isHidden = mobileMenu.classList.contains('hidden');
+            const disclaimer = document.getElementById('disclaimer');
+
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+
+                requestAnimationFrame(() => {
+                    mobileMenu.classList.remove('opacity-0', '-translate-y-3');
+                    mobileMenu.classList.add('opacity-100', 'translate-y-0');
+                });
+                disclaimer.classList.add('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                disclaimer.classList.remove('hidden');
+                closeMobileMenu();
+            }
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('opacity-0', '-translate-y-3');
+            mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+            document.body.style.overflow = '';
+
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        }
+
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (
+                !mobileMenu.classList.contains('hidden') &&
+                !mobileMenu.contains(e.target) &&
+                !menuBtn.contains(e.target)
+            ) {
+                closeMobileMenu();
+            }
+        });
+
+        // Dark mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem(
+                'theme',
+                document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Accordion logic
+        const detailsElements = document.querySelectorAll('#mobileMenu details');
+        detailsElements.forEach((detail) => {
+            detail.addEventListener('toggle', () => {
+                if (detail.open) {
+                    detailsElements.forEach((other) => {
+                        if (other !== detail) other.open = false;
+                    });
+                }
+            });
+        });
+
+        // Set current year in footer
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    </script>
+
+    <script src="~/js/dropdown.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", function () {
+            navigator.serviceWorker.register("/appServiceWorker.js");
+          });
+        }
+    </script>
+
+
+</body>
+</html>
+
+

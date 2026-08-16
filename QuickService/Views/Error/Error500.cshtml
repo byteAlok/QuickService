@@ -1,0 +1,175 @@
+@{
+    Layout = "_ErrorLayout";
+    ViewData["Title"] = "Server Error";
+}
+
+<div class="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-slate-800 shadow-xl border border-rose-100 dark:border-rose-900/30 p-8 md:p-12 lg:p-16 text-center transform transition-all duration-500 hover:shadow-2xl">
+    <!-- Dynamic Background Gradients specific to 500 -->
+    <div class="absolute inset-0 pointer-events-none opacity-50 dark:opacity-20 z-0">
+        <div class="absolute top-0 left-0 w-72 h-72 bg-rose-200 dark:bg-rose-900 rounded-full blur-3xl opacity-50 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-72 bg-orange-200 dark:bg-orange-900 rounded-full blur-3xl opacity-50 transform translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center max-w-4xl mx-auto">
+        <!-- Main 500 Visual / SVG Illustration with Hardware/Gears Theme -->
+        <div class="relative mb-8 w-full max-w-sm mx-auto group [perspective:1000px]">
+            <div class="absolute inset-0 bg-rose-400/20 dark:bg-rose-900/40 rounded-full filter blur-3xl transform scale-75 group-hover:scale-100 transition-transform duration-700 ease-in-out"></div>
+            
+            <svg class="w-full h-auto text-slate-800 dark:text-slate-200 relative z-10" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Server Racks -->
+                <rect x="120" y="80" width="160" height="140" rx="8" fill="url(#serverGradient)" fill-opacity="0.1" stroke="currentColor" stroke-width="6"/>
+                <!-- Rack Top -->
+                <path d="M120 120H280" stroke="currentColor" stroke-width="6"/>
+                <path d="M120 160H280" stroke="currentColor" stroke-width="6"/>
+                <path d="M120 200H280" stroke="currentColor" stroke-width="6"/>
+                
+                <!-- Lights -->
+                <circle cx="140" cy="100" r="4" fill="#10b981" class="animate-pulse"/>
+                <circle cx="160" cy="100" r="4" fill="#3b82f6" class="animate-pulse" style="animation-delay: 0.5s;"/>
+                <circle cx="140" cy="140" r="4" fill="#ef4444" class="animate-pulse" style="animation-duration: 0.5s;"/>
+                <circle cx="160" cy="140" r="4" fill="#ef4444" class="animate-pulse" style="animation-duration: 0.7s;"/>
+                <circle cx="140" cy="180" r="4" fill="#10b981" class="animate-pulse" style="animation-delay: 1.2s;"/>
+                
+                <!-- Broken Cable / Warning Sign -->
+                <path d="M250 140L280 140C291.046 140 300 148.954 300 160V180C300 191.046 291.046 200 280 200H250" stroke="#f43f5e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 6" class="animate-pulse"/>
+                <path d="M290 120L310 100M310 120L290 100" stroke="#f43f5e" stroke-width="6" stroke-linecap="round" class="animate-bounce"/>
+                
+                <!-- Rotating Gear Background -->
+                <g class="animate-spin" style="animation-duration: 4s; transform-origin: 100px 200px;">
+                    <circle cx="100" cy="200" r="20" stroke="currentColor" stroke-width="6" stroke-dasharray="10 5" stroke-opacity="0.5"/>
+                    <circle cx="100" cy="200" r="8" fill="currentColor" fill-opacity="0.5"/>
+                </g>
+
+                <g class="animate-spin" style="animation-duration: 3s; animation-direction: reverse; transform-origin: 300px 220px;">
+                    <circle cx="300" cy="220" r="16" stroke="currentColor" stroke-width="6" stroke-dasharray="8 6" stroke-opacity="0.5"/>
+                    <circle cx="300" cy="220" r="6" fill="currentColor" fill-opacity="0.5"/>
+                </g>
+
+                <defs>
+                    <linearGradient id="serverGradient" x1="120" y1="80" x2="280" y2="220" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="currentColor"/>
+                        <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- 500 Heading -->
+        <h1 class="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-orange-500 dark:from-rose-400 dark:to-orange-400 mb-4 drop-shadow-sm select-none">
+            500
+        </h1>
+        
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
+            Server Error
+        </h2>
+
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+            The server encountered an unexpected condition that prevented it from fulfilling the request.
+        </p>
+        <p class="text-base text-slate-500 dark:text-slate-400 max-w-xl mx-auto mb-10 pb-4 border-b border-slate-200 dark:border-slate-700">
+            Our technical team has been notified and is working on resolving the issue immediately.
+        </p>
+
+        <!-- Possible Causes Section -->
+        <div class="w-full max-w-3xl mx-auto bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 md:p-8 mb-12 text-left shadow-sm hover:shadow-md transition-shadow">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                This might be caused by:
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-white dark:hover:bg-slate-700/50 transition-colors group border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
+                    <div class="bg-rose-100 dark:bg-rose-900/30 p-2.5 rounded-lg text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-900 dark:text-white">Temporary Server Issue</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-400 mt-1 block leading-relaxed">High traffic or temporary downtime is preventing the request.</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-white dark:hover:bg-slate-700/50 transition-colors group border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
+                    <div class="bg-orange-100 dark:bg-orange-900/30 p-2.5 rounded-lg text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-900 dark:text-white">Database Connectivity Problem</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-400 mt-1 block leading-relaxed">We cannot reach the backend database.</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-white dark:hover:bg-slate-700/50 transition-colors group border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
+                    <div class="bg-indigo-100 dark:bg-indigo-900/30 p-2.5 rounded-lg text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-900 dark:text-white">Internal Application Error</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-400 mt-1 block leading-relaxed">A bug in the application logic triggered an exception.</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-white dark:hover:bg-slate-700/50 transition-colors group border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
+                    <div class="bg-emerald-100 dark:bg-emerald-900/30 p-2.5 rounded-lg text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-900 dark:text-white">Maintenance Activity</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-400 mt-1 block leading-relaxed">Scheduled or emergency maintenance is in progress.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress indicator pretending to check system -->
+            <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
+                <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium tracking-wide">
+                    <span>Diagnostic Check</span>
+                    <span class="animate-pulse text-amber-500">In Progress...</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                    <div class="bg-gradient-to-r from-rose-500 to-amber-500 h-1.5 rounded-full relative w-full translate-x-[-100%] animate-[slideRight_3s_ease-in-out_infinite_alternate]"></div>
+                </div>
+                <style>
+                    @@keyframes slideRight { 0% { transform: translateX(-100%); } 100% { transform: translateX(0); } }
+                </style>
+            </div>
+        </div>
+
+        <!-- Action / Navigation Buttons -->
+        <div class="w-full flex-col sm:flex-row flex items-center justify-center gap-4">
+            <!-- Retry Action (Reload Page) -->
+            <button onclick="window.location.reload();" class="w-full sm:w-auto px-8 py-3.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 border border-transparent shadow-lg shadow-slate-900/20 dark:shadow-white/20 rounded-xl text-base font-semibold transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:focus:ring-white flex items-center justify-center gap-2 group">
+                <svg class="w-5 h-5 group-hover:-rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Retry Request
+            </button>
+
+            <!-- Home Action -->
+            <a asp-controller="Home" asp-action="Index" class="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Home
+            </a>
+
+            <!-- Services Action -->
+            <a asp-controller="Services" asp-action="Services" class="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                </svg>
+                Services
+            </a>
+
+            <!-- Contact Support -->
+            <a asp-controller="About" asp-action="ContactUs" class="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-slate-800 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-900/50 hover:border-sky-300 dark:hover:border-sky-700 hover:bg-sky-50 dark:hover:bg-sky-900/20 shadow-sm rounded-xl text-base font-medium transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                Support
+            </a>
+        </div>
+        
+    </div>
+</div>

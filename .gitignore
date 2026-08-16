@@ -1,0 +1,88 @@
+## .NET / ASP.NET Core / Visual Studio
+## Ignore IDE files, build output, generated files,
+## temporary files, NuGet packages and local configuration.
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+
+# Build directories
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Architecture-specific build output
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Ww][Ii][Nn]32/
+
+# MSBuild
+bld/
+[Bb]uild[Ll]og.*
+*.binlog
+
+# .NET generated files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# ASP.NET scaffolding
+ScaffoldingReadMe.txt
+
+# Code coverage
+CodeCoverage/
+coverage/
+*.coverage
+*.coveragexml
+
+# Test results
+[Tt]est[Rr]esult*/
+TestResult.xml
+nunit-*.xml
+*.trx
+
+# Environment / local secrets
+.env
+.env.*
+!.env.example
+
+# User-specific / temporary files
+~$*
+*~
+*.tmp
+*.temp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# JetBrains Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# VS Code local settings
+.vscode/
+
+# Database local files
+*.mdf
+*.ldf
+*.ndf

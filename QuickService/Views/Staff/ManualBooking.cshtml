@@ -1,0 +1,336 @@
+<!-- File: Views/Staff/ManualBooking.cshtml -->
+@{
+    Layout = "_StaffLayout";
+    ViewData["Title"] = "New Booking";
+}
+
+@section Styles {
+    <style>
+        .custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+
+        .dark .custom-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+
+        .input-error {
+            border-color: #EF4444 !important;
+            background-color: #FEF2F2 !important;
+        }
+
+        .dark .input-error {
+            background-color: #450a0a !important;
+            border-color: #EF4444 !important;
+        }
+    </style>
+}
+
+
+@{
+    var status = TempData["BookingStatus-staff"] as string;
+    // var status = "Your booking has been submitted successfully!";
+    var type = TempData["BookingType-staff"] as string;
+    // var type = "error";
+}
+
+@if (!string.IsNullOrEmpty(status))
+{
+    <div class="flex justify-center mt-4">
+
+        @if (type == "success")
+        {
+            <div class="flex items-center gap-3 px-6 py-3 border
+                                        border-cyan-400 bg-cyan-50 text-cyan-900
+                                        dark:border-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-100
+                                        shadow-lg max-w-xl w-full rounded-md">
+
+                <i class="fa-solid fa-circle-check text-2xl text-cyan-600 dark:text-cyan-400"></i>
+
+                <div>
+                    <h4 class="font-semibold text-base pb-1 sm:pb-0 leading-tight">
+                        Booking Confirmed
+                    </h4>
+                    <p class="text-sm opacity-90">@status</p>
+                </div>
+            </div>
+        }
+        else if (type == "error")
+        {
+            <div class="flex items-center gap-3 px-6 py-3 border
+                                        border-red-300 bg-red-100 text-red-800
+                                        dark:border-red-600 dark:bg-red-900/40 dark:text-red-200
+                                        shadow-lg max-w-xl w-full rounded-md">
+
+                <i class="fa-solid fa-triangle-exclamation text-2xl text-red-600 dark:text-red-200"></i>
+
+                <div>
+                    <h4 class="font-semibold pb-1 sm:pb-0 text-base leading-tight">
+                        Booking Failed
+                    </h4>
+                    <p class="text-sm opacity-90">@status</p>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+
+<div class="max-w-5xl mx-auto">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Create New Booking</h1>
+        <a asp-action="StaffBookingList" asp-controller="Booking" class="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
+            <i class="fa-solid fa-arrow-left mr-1"></i> Back to List
+        </a>
+    </div>
+
+    <form id="bookingForm" method="post" asp-action="ManualBooking" asp-controller="Staff" class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 transition-colors">
+
+        @Html.AntiForgeryToken()
+        <!-- SECTION 1: Product Information -->
+        <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-700 pb-2">Product Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Product Category *</label>
+                <select id="productCategory" name="product_category" onchange="handleProductChange()" class="custom-select w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Category --</option>
+                    <option value="AC">Air Conditioner (AC)</option>
+                    <option value="Refrigerator">Refrigerator</option>
+                    <option value="WashingMachine">Washing Machine</option>
+                    <option value="Microwave">Microwave</option>
+                    <option value="TV">LED/LCD TV</option>
+                    <option value="RO">RO Water Purifier</option>
+                    <option value="Geyser">Geyser</option>
+                    <option value="Treadmill">Treadmill</option>
+                    <option value="Electrical">Electrical Work</option>
+                </select>
+                <div id="productError" class="text-red-500 text-xs mt-1 hidden">Product category is required.</div>
+            </div>
+
+            <div id="subCategoryGroup" class="">
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Sub Category *</label>
+                <select id="subCategory" name="sub_category" class="custom-select w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Sub Category --</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Brand *</label>
+                <select id="brand" name="brand" class="custom-select w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Brand --</option>
+                </select>
+                <div id="brandError" class="text-red-500 text-xs mt-1 hidden">Brand is required.</div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Issue Type *</label>
+                <select id="issueType" name="issue_type" class="custom-select w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Issue Type --</option>
+                </select>
+                <div id="issueTypeError" class="text-red-500 text-xs mt-1 hidden">Issue type is required.</div>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Issue Description (Optional)</label>
+                <input type="text" name="issue_description" placeholder="Describe the issue briefly" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Warranty Status *</label>
+                <div class="flex items-center gap-4 mt-2">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="warranty_status" value="In Warranty" class="text-blue-600 focus:ring-blue-500 h-4 w-4 bg-slate-100 border-slate-300">
+                        <span class="ml-2 text-sm text-slate-600 dark:text-slate-400">In Warranty</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="warranty_status" value="Out of Warranty" class="text-blue-600 focus:ring-blue-500 h-4 w-4 bg-slate-100 border-slate-300">
+                        <span class="ml-2 text-sm text-slate-600 dark:text-slate-400">Out of Warranty</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="warranty_status" value="Dont Know" class="text-blue-600 focus:ring-blue-500 h-4 w-4 bg-slate-100 border-slate-300">
+                        <span class="ml-2 text-sm text-slate-600 dark:text-slate-400">Don't Know</span>
+                    </label>
+                </div>
+                <div id="warrantyError" class="text-red-500 text-xs mt-1 hidden">Please select warranty status.</div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Customer Details -->
+        <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-700 pb-2">Customer Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Customer Name *</label>
+                <input type="text" name="full_name" placeholder="Customer Full Name" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="nameError" class="text-red-500 text-xs mt-1 hidden">Name is required (min 3 chars).</div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Address</label>
+                <input type="email" name="email" placeholder="Email Id" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="emailError" class="text-red-500 text-xs mt-1 hidden">Invalid email format.</div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Phone Number *</label>
+                <input type="tel" name="phone_number" placeholder="Phone Number" maxlength="10" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="phoneError" class="text-red-500 text-xs mt-1 hidden">Valid 10-digit number required.</div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Alternate Phone</label>
+                <input type="tel" name="alt_phone_number" placeholder="Alternate Phone Number" maxlength="10" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="altPhoneError" class="text-red-500 text-xs mt-1 hidden">Invalid number format.</div>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Address *</label>
+                <textarea name="address" rows="2" placeholder="Detailed Address" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <div id="addressError" class="text-red-500 text-xs mt-1 hidden">Address is required > 10 chars.</div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">City *</label>
+                <select name="city" class="custom-select w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select City --</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Ranga Reddy">Ranga Reddy</option>
+                    <option value="Sanga Reddy">Sanga Reddy</option>
+                    <option value="Nizamabad">Nizamabad</option>
+                    <option value="Medak">Medak</option>
+                    <option value="Suryapet">Suryapet</option>
+                    <option value="Warangal">Warangal</option>
+                    <option value="Mulugu">Mulugu</option>
+                    <option value="Narayanpet">Narayanpet</option>
+                </select>
+                <div id="cityError" class="text-red-500 text-xs mt-1 hidden">City is required.</div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Pin Code *</label>
+                <input type="text" name="pin_code" placeholder="Pincode" maxlength="6" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div id="pinError" class="text-red-500 text-xs mt-1 hidden">Valid 6-digit PIN required.</div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Scheduling & Status -->
+        <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-700 pb-2">Scheduling & Status</h2>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+            <!-- Preferred Day -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Preferred Day *
+                </label>
+                <select id="preferredDay"
+                        name="preferred_day"
+                        onchange="handleDayChange()"
+                        class="custom-select w-full bg-slate-50 dark:bg-slate-900
+                       border border-slate-300 dark:border-slate-600
+                       rounded-lg px-3 py-2
+                       text-slate-700 dark:text-slate-200
+                       focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Day --</option>
+                    <option value="Today">Today</option>
+                    <option value="Tomorrow">Tomorrow</option>
+                    <option value="DayAfterTomorrow">Day After Tomorrow</option>
+                    <option value="Custom">Custom Date</option>
+                </select>
+
+                <div id="dayError" class="text-red-500 text-xs mt-1 hidden">
+                    Please select a day.
+                </div>
+
+                <div id="customDateGroup" class="hidden mt-2">
+                    <input type="date"
+                           id="customDate"
+                           name="custom_date" placeholder="Select Custom Date"
+                           class="w-full bg-slate-50 dark:bg-slate-900
+                          border border-slate-300 dark:border-slate-600
+                          rounded-lg px-3 py-2
+                          text-slate-700 dark:text-slate-200
+                          focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                    <div id="customDateError" class="text-red-500 text-xs mt-1 hidden">
+                        Date is required.
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Time Slot -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Time Slot *
+                </label>
+                <select id="timeSlot"
+                        name="time_slot"
+                        class="custom-select w-full bg-slate-50 dark:bg-slate-900
+                       border border-slate-300 dark:border-slate-600
+                       rounded-lg px-3 py-2
+                       text-slate-700 dark:text-slate-200
+                       focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Time Slot --</option>
+                    <option value="Morning">Morning (9AM - 12PM)</option>
+                    <option value="Afternoon">Afternoon (12PM - 4PM)</option>
+                    <option value="Evening">Evening (4PM - 8PM)</option>
+                </select>
+
+                <div id="timeError" class="text-red-500 text-xs mt-1 hidden">
+                    Please select a time slot.
+                </div>
+            </div>
+
+            <!-- Priority -->
+            <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Priority (Optional)
+                </label>
+                <select name="priority"
+                        class="custom-select w-full bg-slate-50 dark:bg-slate-900
+                       border border-slate-300 dark:border-slate-600
+                       rounded-lg px-3 py-2
+                       text-slate-700 dark:text-slate-200
+                       focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Priority --</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Urgent">High (Emergency)</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Summary Box -->
+        <div class="mt-8 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Booking Fees Estimate</h3>
+            <div class="flex justify-between items-center text-sm text-slate-600 dark:text-slate-400">
+                <span>Visit/Inspection Charges:</span>
+                <span class="font-bold text-blue-600 dark:text-blue-400">Rs 150 - Rs 250</span>
+            </div>
+            <div class="mt-4 space-y-1 text-xs text-gray-500 italic">
+                <p>* +Rs 100 for outer areas</p>
+                <p>* Charges vary by appliance type and area. Final quote after inspection.</p>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="flex items-center justify-between gap-4 pt-6 mt-6 border-t border-slate-100 dark:border-slate-700">
+
+            <a type="button" asp-action="ManualBooking" asp-controller="Staff" class="px-4 sm:px-6 py-2 bg-purple-600 text-white font-medium hover:bg-purple-600 font-medium rounded-lg shadow-sm transition-colors">
+                Refresh Form
+            </a>
+            @* <button type="button" class="px-6 mx-2 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Cancel</button> *@
+            <button type="submit" class="px-4 sm:px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors">
+                Create Booking
+            </button>
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/booking-admin-staff.js"></script>
+}

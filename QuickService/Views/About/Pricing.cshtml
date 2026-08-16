@@ -1,0 +1,665 @@
+@{
+    ViewData["Title"] =
+        "Appliance Repair Pricing & Visit Charges � Affordable Service Cost | QuickService";
+
+    ViewData["Description"] =
+        "Check QuickService appliance repair pricing and visit charges for AC, washing machine, refrigerator, RO, TV & electrician services. Transparent pricing, no hidden fees, affordable repair cost & doorstep technician support with easy online booking.";
+}
+@section Styles {
+
+    <style>
+        /* Typography Scale Fixes for Mobile */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.2;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+
+        /* Gradient Text Utilities */
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #4285F4 0%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glass Cards */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .dark .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Pricing Table Row Hover */
+        .pricing-row:hover {
+            background-color: rgba(66, 133, 244, 0.05);
+        }
+    </style>
+}
+
+    <!--
+        =============================================
+        1. HERO SECTION
+        =============================================
+    -->
+    <header class="relative pt-10 pb-10 lg:pt-16 lg:pb-16 overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+            <div class="absolute top-20 right-10 w-32 h-32 lg:w-64 lg:h-64 bg-green-400/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 left-10 w-40 h-40 lg:w-80 lg:h-80 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+        </div>
+
+        <div class="container max-w-7xl mx-auto px-4 text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm mb-6 animate-fade-in-up">
+                <i class="fa-solid fa-tag text-green-600 text-xs"></i>
+                <span class="text-xs font-bold tracking-wider uppercase text-gray-600 dark:text-gray-300">No Hidden Costs</span>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+                Honest, Transparent <br>
+                <span class="text-gradient-blue">Service Pricing</span>
+            </h1>
+
+            <!-- Subtext -->
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up px-4" style="animation-delay: 0.2s;">
+                Know exactly what you pay for. We believe in fair pricing for professional work, verified experts, and genuine spare parts.
+            </p>
+
+            <!-- Disclaimer Box -->
+            <div class="max-w-3xl mx-auto bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/30 rounded-xl p-4 mb-8 text-sm text-gray-600 dark:text-gray-400 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <i class="fa-solid fa-circle-info text-blue-600 mr-1"></i>
+                <span class="font-medium">Important:</span> A standard visiting charge applies if you choose not to proceed with the repair after diagnosis. This covers our technician's time and travel expenses.
+            </div>
+        </div>
+    </header>
+
+    <!--
+        =============================================
+        2. PRICING SECTIONS
+        =============================================
+    -->
+    <div class="container max-w-7xl mx-auto px-4 pb-16">
+
+        <!-- Washing Machine -->
+        <section id="washing-machine" class="mb-16 scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fa-solid fa-soap"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Washing Machine</h2>
+                    <p class="text-sm text-gray-500">Repair & Servicing Charges</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Visit Charges Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Diagnosis & Visit Charges</h3>
+                        <p class="text-xs text-gray-500 mt-1">Includes checkup of issues like not spinning, leakage, error codes, etc.</p>
+                    </div>
+                    <div class="p-0">
+                        <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Semi-Automatic</span>
+                            <span class="font-bold text-blue-600">Rs. 199</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Top Load (Fully Automatic)</span>
+                            <span class="font-bold text-blue-600">Rs. 249</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Front Load</span>
+                            <span class="font-bold text-blue-600">Rs. 299</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Bosch / Siemens / IFB Front Load</span>
+                            <span class="font-bold text-blue-600">Rs. 349</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Charges Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="p-6 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">General Servicing</h3>
+                        <p class="text-xs text-gray-500 mt-1">Deep cleaning and descaling services.</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Semi-Automatic Service</span>
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Top Load Deep Clean</span>
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 pricing-row">
+                            <span class="font-medium text-gray-700 dark:text-gray-300">Front Load Deep Clean</span>
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 699</span>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-800 rounded-lg text-xs text-yellow-800 dark:text-yellow-200">
+                            <i class="fa-solid fa-star mr-1"></i> Descaling powder charges extra if required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="h-px bg-gray-200 dark:bg-gray-800 w-full mb-16"></div>
+
+        <!-- Refrigerator -->
+        <section id="refrigerator" class="mb-16 scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900 text-green-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fa-solid fa-snowflake"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Refrigerator</h2>
+                    <p class="text-sm text-gray-500">Cooling Issues & Repair</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Single Door -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center hover:border-green-600 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Single Door</h3>
+                    <div class="text-3xl font-bold text-green-600 mb-2">Rs. 199</div>
+                    <p class="text-xs text-gray-500">Visit & Diagnosis</p>
+                    <div class="w-full h-px bg-gray-100 dark:bg-gray-700 my-4"></div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 text-left w-full">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Cooling issues</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Thermostat check</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Gas leak check</li>
+                    </ul>
+                </div>
+
+                <!-- Double Door -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center hover:border-green-600 transition-colors">
+                    <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">POPULAR</div>
+                    <h3 class="font-bold text-lg mb-2">Double Door</h3>
+                    <div class="text-3xl font-bold text-green-600 mb-2">Rs. 249</div>
+                    <p class="text-xs text-gray-500">Visit & Diagnosis</p>
+                    <div class="w-full h-px bg-gray-100 dark:bg-gray-700 my-4"></div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 text-left w-full">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Defrost issues</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Water leakage</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Sensor check</li>
+                    </ul>
+                </div>
+
+                <!-- Side by Side -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center hover:border-green-600 transition-colors">
+                    <h3 class="font-bold text-lg mb-2">Side by Side / Multi-Door</h3>
+                    <div class="text-3xl font-bold text-green-600 mb-2">Rs. 399</div>
+                    <p class="text-xs text-gray-500">Visit & Diagnosis</p>
+                    <div class="w-full h-px bg-gray-100 dark:bg-gray-700 my-4"></div>
+                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 text-left w-full">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Inverter PCB check</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Display errors</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Compressor test</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 text-center">* Gas charging and compressor replacement costs depend on the refrigerator model and refrigerant type.</p>
+        </section>
+
+        <!-- Divider -->
+        <div class="h-px bg-gray-200 dark:bg-gray-700 w-full mb-16"></div>
+
+        <!-- AC -->
+        <section id="ac" class="mb-16 scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900 text-orange-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fa-solid fa-wind"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Air Conditioner</h2>
+                    <p class="text-sm text-gray-500">Repair, Service & Installation</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Window AC Card -->
+                <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:to-orange-50 dark:hover:from-gray-800 dark:hover:to-orange-900/10">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Window AC</h3>
+                        <div class="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-500 flex items-center justify-center">
+                            <i class="fa-regular fa-square"></i>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Visit / Diagnosis</span>
+                            <span class="font-bold text-gray-900 dark:text-white">Rs. 249</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Wet Service</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Gas Charging</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 2200+</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Installation</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Uninstallation</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Split AC Card -->
+                <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:to-blue-50 dark:hover:from-gray-800 dark:hover:to-blue-900/10">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">MOST POPULAR</div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Split AC</h3>
+                        <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center">
+                            <i class="fa-solid fa-grip-lines"></i>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Visit / Diagnosis</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 299</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Wet Service</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 599</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Gas Charging</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 2400+</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Installation</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 1499</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Uninstallation</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 799</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cassette AC Card -->
+                <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-purple-900/10">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Cassette AC</h3>
+                        <div class="w-10 h-10 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-500 flex items-center justify-center">
+                            <i class="fa-solid fa-minimize"></i>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Visit / Diagnosis</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Wet Service</span>
+                        <span class="font-bold text-gray-900 dark:text-white">Rs. 1499</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Gas Charging</span>
+                            <span class="font-bold text-gray-500 text-xs uppercase">On Quote</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-700">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Installation</span>
+                            <span class="font-bold text-gray-500 text-xs uppercase">On Quote</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">Uninstallation</span>
+                            <span class="font-bold text-gray-500 text-xs uppercase">On Quote</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p class="text-xs text-gray-500 mt-6 text-center">* Additional core cutting, copper pipe, or stand charges distinct from installation price.</p>
+        </section>
+
+        <!-- Divider -->
+        <div class="h-px bg-gray-200 dark:bg-gray-700 w-full mb-16"></div>
+
+        <!-- Other Appliances Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Microwave/OTG -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900 text-red-600 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-temperature-high"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Microwave / OTG</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Diagnosis (Solo/Grill)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 249</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Diagnosis (Convection)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 299</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Built-in Microwave</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">Magnetron or Transformer replacement cost quoted after inspection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RO Water Purifier -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">RO Water Purifier</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit & Diagnosis</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 199</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">General Service (Cleaning)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 350</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Filter Change (Set)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">~Rs. 2500+</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">Genuine filters from Kent, Aquaguard, Livpure provided.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LED TV -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-tv"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">LED / Smart TV</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit (Up to 32")</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 249</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit (40" - 55")</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 349</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit (Above 55")</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">Panel or Motherboard repair estimates provided after lab diagnosis.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Geyser -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-600 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Geyser</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit & Checkup</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 199</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Installation (15/25L)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Descaling Service</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 499</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">Element or Thermostat replacement extra.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chimney -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900 text-purple-600 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-fan"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Kitchen Chimney</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit Charge</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 249</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Deep Cleaning (Basic)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 1199</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Deep Cleaning (Auto-Clean)</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 1499</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">Deep cleaning involves dismantling and caustic soda wash.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Electrical -->
+            <section class="bg-gray-50 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900 text-yellow-600 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-plug-circle-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Electrical Work</h3>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Visit Charge</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 149</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Switch/Socket Replacement</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 50 / point</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600 dark:text-gray-400">Fan Installation</span>
+                    <span class="font-bold text-gray-900 dark:text-white">Rs. 150</span>
+                    </div>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-xs text-gray-500">Minimum job value of Rs.250 required.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!--
+        =============================================
+        3. GUARANTEE SECTION
+        =============================================
+    -->
+    <section class="py-12 bg-gray-50 dark:bg-gray-900 border-y border-gray-100 dark:border-gray-700">
+        <div class="container max-w-7xl mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-8 lg:gap-16">
+                    <div class="md:w-1/2">
+                        <span class="inline-block py-1 px-3 rounded bg-white/20 text-xs font-bold tracking-wider mb-4 border border-white/30">OUR PROMISE</span>
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Why our pricing makes sense?</h2>
+                        <p class="text-blue-100 leading-relaxed mb-6">
+                            We might not be the cheapest option in the market, but we are certainly the most valuable. Cheap repairs often cost more in the long run due to repeated failures and fake parts.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2 text-sm font-medium bg-white/10 px-4 py-2 rounded-lg">
+                                <i class="fa-solid fa-shield-halved"></i> 30-Day Service Warranty
+                            </div>
+                            <div class="flex items-center gap-2 text-sm font-medium bg-white/10 px-4 py-2 rounded-lg">
+                                <i class="fa-solid fa-receipt"></i> GST Invoices
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                        <div class="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-user-check text-2xl mb-3"></i>
+                            <h4 class="font-bold text-lg">Verified Techs</h4>
+                            <p class="text-xs text-blue-100 mt-1">Background checked, uniformed, and trained employees.</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-5 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-box-open text-2xl mb-3"></i>
+                            <h4 class="font-bold text-lg">Genuine Parts</h4>
+                            <p class="text-xs text-blue-100 mt-1">We never use counterfeit cheap spares.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+        =============================================
+        4. FAQ SECTION
+        =============================================
+    -->
+    <section class="py-12 lg:py-16 bg-gray-100 dark:bg-gray-900">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+                <p class="text-gray-500 mt-2">Doubts about our pricing? Clarify them here.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm cursor-pointer p-4 border border-gray-100 dark:border-gray-700" open>
+                    <summary class="font-bold text-gray-900 dark:text-white flex justify-between items-center list-none select-none">
+                        Is the 'Visit Charge' adjustable?
+                        <span class="text-blue-500 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+                        Yes! The visit charge covers the technician's travel and diagnosis time. <strong>If you agree to the repair estimate, the visit charge is WAIVED completely.</strong> You only pay the repair cost. If you decline the repair, you only pay the visit charge.
+                    </div>
+                </details>
+
+                <details class="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm cursor-pointer p-4 border border-gray-100 dark:border-gray-700">
+                    <summary class="font-bold text-gray-900 dark:text-white flex justify-between items-center list-none select-none">
+                        Do you offer warranty on parts?
+                        <span class="text-blue-500 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+                        Absolutely. We provide a <strong>3-month warranty on most spare parts</strong> replaced by us. For gas charging, we provide a 1-month leakage warranty. Service labor has a 14-day warranty.
+                    </div>
+                </details>
+
+                <details class="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm cursor-pointer p-4 border border-gray-100 dark:border-gray-700">
+                    <summary class="font-bold text-gray-900 dark:text-white flex justify-between items-center list-none select-none">
+                        Are these prices final?
+                        <span class="text-blue-500 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+                        The prices listed above are for labour/service charges. <strong>Spare parts cost is extra</strong> and depends on the specific model and brand of your appliance. Our technician will provide a total quote before starting work.
+                    </div>
+                </details>
+
+                <details class="group bg-gray-50 dark:bg-gray-800 rounded-xl shadow-sm cursor-pointer p-4 border border-gray-100 dark:border-gray-700">
+                    <summary class="font-bold text-gray-900 dark:text-white flex justify-between items-center list-none select-none">
+                        Do you charge extra for outer areas?
+                        <span class="text-blue-500 group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="mt-4 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
+                        Our standard pricing applies to city limits. For locations more than 15km away from our center, a flat surcharge of ?100-200 may apply to cover fuel costs. This will be informed to you during booking.
+                    </div>
+                </details>
+            </div>
+
+            <div class="mt-8 text-center bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800/30 rounded-xl p-4">
+                <p class="text-sm text-yellow-800 dark:text-yellow-200">
+                    <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                    <strong>Note:</strong> We do not ask for advance payments via UPI links before the technician visits. Please pay only after the job is completed or as per parts requirement on-site.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!--
+        =============================================
+        5. BOTTOM CTA
+        =============================================
+    -->
+    <section class="py-12 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700">
+        <div class="container max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Ready to book a service?</h2>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="tel:+919648703048" class="flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-blue-500/50 hover:scale-105 transition-all w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-phone"></i> Call +91 96487 03048
+                </a>
+                <a href="https://wa.me/919648703048" class="flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-green-500/50 hover:scale-105 transition-all w-full sm:w-auto justify-center">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 text-sm mt-6">
+                Available 9 AM to 8 PM, 7 Days a week.
+            </p>
+        </div>
+    </section>
+

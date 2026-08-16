@@ -1,0 +1,381 @@
+@model IEnumerable<QuickService.Models.StaffModel>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Staff Management";
+}
+
+@{
+    var updateMsg = TempData["StaffUpdateStatus"] as string;
+    var updateType = TempData["StaffUpdateType"] as string;
+}
+
+@if (!string.IsNullOrEmpty(updateMsg))
+{
+    <div class="px-6 pt-4">
+        <div class="flex items-center gap-3 px-4 py-3 border rounded-xl shadow-sm @(updateType == "success" ? "border-green-200 bg-green-50 text-green-800 dark:border-green-900/50 dark:bg-green-900/20 dark:text-green-200" : "border-red-200 bg-red-50 text-red-800 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-200")">
+            <i class="fa-solid @(updateType == "success" ? "fa-circle-check" : "fa-circle-exclamation") text-base"></i>
+            <p class="text-sm font-semibold tracking-tight">@updateMsg</p>
+        </div>
+    </div>
+}
+
+<div class="flex flex-col h-[calc(100vh-theme(spacing.32))] bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 m-6 transition-colors overflow-hidden">
+    
+    <!-- Toolbar -->
+    <div class="p-4 border-b border-slate-200 dark:border-slate-700 flex flex-wrap gap-4 items-center justify-between">
+        <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">Staff Management</h1>
+        
+        <form method="get" asp-action="StaffList" class="flex flex-wrap items-center gap-3">
+             @Html.AntiForgeryToken()
+            <div class="relative">
+                <input type="text" name="search" value="@ViewBag.SearchTerm" placeholder="Search staff..." class="pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64 transition-all" />
+                <div class="absolute inset-y-0 left-0 flex items-center px-3 text-slate-400">
+                    <i class="fa-solid fa-search text-xs"></i>
+                </div>
+            </div>
+
+             <div class="relative">
+                <select name="status" onchange="this.form.submit()" class="appearance-none pl-3 pr-8 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="All" selected="@(ViewBag.CurrentStatus == "All")">All Activity</option>
+                    <option value="Active" selected="@(ViewBag.CurrentStatus == "Active")">Active</option>
+                    <option value="Disabled" selected="@(ViewBag.CurrentStatus == "Disabled")">Disabled</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+
+            <a href="/Admin/RegisterStaff" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Register Staff</span>
+            </a>
+        </form>
+    </div>
+
+    <!-- Wide Table Container -->
+    <div class="flex-1 overflow-auto w-full admin-dashboard-scroll">
+        <table class="w-full min-w-[1200px] text-sm text-left border-collapse">
+            <thead class="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10 shadow-sm">
+                <tr>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-20 text-center">S.No</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-72">Personnel Identifier</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-44">Contact Number</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-64">Service Address</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-40">Skillset</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-40 text-center">Account Created</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-36 text-center">Status</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-36 text-center sticky right-0 bg-slate-50 dark:bg-slate-900 shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.1)]">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+                @if (Model != null && Model.Any())
+                {
+                    int i = (ViewBag.CurrentPage - 1) * 10;
+                    @foreach (var staff in Model)
+                    {
+                        i++;
+                        <tr class="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-colors group">
+                            <td class="px-4 py-4 text-slate-500 font-mono text-center">@i.ToString("D2")</td>
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center text-slate-400 font-bold overflow-hidden border border-slate-200 dark:border-slate-600">
+                                        @if (!string.IsNullOrEmpty(staff.staff_image))
+                                        {
+                                            <img src="@staff.staff_image" alt="" class="h-full w-full object-cover" />
+                                        }
+                                        else
+                                        {
+                                            <span>@staff.staff_name.Substring(0, 1)</span>
+                                        }
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-slate-800 dark:text-slate-100">@staff.staff_name</span>
+                                        <span class="text-xs text-slate-500 dark:text-slate-400">@staff.staff_email</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4 text-slate-700 dark:text-slate-200 font-medium">
+                                <i class="fa-solid fa-phone-alt text-[10px] text-slate-400 mr-2"></i>@staff.staff_phone
+                            </td>
+                            <td class="px-4 py-4">
+                                <div class="text-xs text-slate-600 dark:text-slate-300 line-clamp-1">@staff.staff_address</div>
+                                <div class="text-[10px] uppercase font-bold text-slate-400 mt-0.5">@staff.staff_city_state</div>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border border-current text-blue-600 dark:text-blue-400">
+                                    @staff.staff_skill
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 text-center text-slate-600 dark:text-slate-300 text-xs">
+                                @staff.staff_register_date.ToString("MMM dd, yyyy")
+                            </td>
+                            <td class="px-4 py-4 text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium @(staff.staff_status ? "bg-green-100 text-green-800 border border-green-200 dark:bg-green-900/50 dark:text-green-200" : "bg-red-100 text-red-800 border border-red-200 dark:bg-red-900/50 dark:text-red-200")">
+                                    <i class="fa-solid @(staff.staff_status ? "fa-user-check" : "fa-user-x") mr-1.5 text-[10px]"></i>
+                                    @(staff.staff_status ? "Active" : "Disabled")
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 text-center sticky right-0 bg-white dark:bg-slate-800 group-hover:bg-blue-50/50 dark:group-hover:bg-blue-900/20 shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.05)]">
+                                <div class="flex items-center justify-center gap-2">
+                                     <button type="button" 
+                                             onclick='openEditModal(@Json.Serialize(staff))' 
+                                             class="h-8 w-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-blue-600 hover:border-blue-300 dark:hover:text-blue-400 dark:hover:border-blue-800 transition-colors" title="Edit Personnel">
+                                        <i class="fa-solid fa-pen-to-square text-xs"></i>
+                                    </button>
+                                    @if (staff.staff_status)
+                                    {
+                                        <button type="button" 
+                                                onclick="openConfirmModal('disable', @staff.staff_id)" 
+                                                class="h-8 w-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-red-600 hover:border-red-300 dark:hover:text-red-500 dark:hover:border-red-900 transition-colors" title="Disable Personnel">
+                                            <i class="fa-solid fa-user-xmark text-xs"></i>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" 
+                                                onclick="openConfirmModal('enable', @staff.staff_id)" 
+                                                class="h-8 w-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-green-600 hover:border-green-300 dark:hover:text-green-500 dark:hover:border-green-900 transition-colors" title="Enable Personnel">
+                                            <i class="fa-solid fa-user-check text-xs"></i>
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="px-4 py-16 text-center text-slate-500">
+                            <i class="fa-solid fa-user-gear text-4xl opacity-20 mb-4 block"></i>
+                            <p>No personnel records found matching your criteria.</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Pagination Footer -->
+    <div class="p-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between bg-white dark:bg-slate-800 rounded-b-xl">
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+            Showing <span class="font-medium text-slate-700 dark:text-slate-200">@((ViewBag.CurrentPage - 1) * 10 + 1)</span> to <span class="font-medium text-slate-700 dark:text-slate-200">@(Math.Min(ViewBag.CurrentPage * 10, ViewBag.TotalRecords))</span> of <span class="font-medium text-slate-700 dark:text-slate-200">@ViewBag.TotalRecords</span> results
+        </p>
+        <div class="flex gap-2">
+            <a href="?page=@(ViewBag.CurrentPage - 1)&status=@ViewBag.CurrentStatus&search=@ViewBag.SearchTerm" 
+               class="px-3 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors @(ViewBag.CurrentPage <= 1 ? "opacity-50 pointer-events-none" : "")">Previous</a>
+            
+            <a href="?page=@(ViewBag.CurrentPage + 1)&status=@ViewBag.CurrentStatus&search=@ViewBag.SearchTerm" 
+               class="px-3 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "opacity-50 pointer-events-none" : "")">Next</a>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal (Fixed Header/Footer + Responsive Body) -->
+<div id="editModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[85vh] border border-slate-200 dark:border-slate-800">
+        
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-white">Edit Details</h2>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        
+        <!-- Body -->
+        <div class="flex-1 overflow-y-auto admin-dashboard-scroll p-6">
+            <form asp-action="EditStaff" method="post" id="editForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="staff_id" id="edit_staff_id" />
+                
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Staff Name</label>
+                            <input type="text" name="staff_name" id="edit_staff_name" required class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+                            <input type="email" name="staff_email" id="edit_staff_email" required class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label>
+                            <input type="text" name="staff_phone" id="edit_staff_phone" required class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Skill / Specialization</label>
+                            <input type="text" name="staff_skill" id="edit_staff_skill" required class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Technician, AC Repair" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Account Status</label>
+                            <select name="staff_status" id="edit_staff_status" required class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                                <option value="true">Active</option>
+                                <option value="false">Disabled</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">City, State</label>
+                            <input type="text" name="staff_city_state" id="edit_staff_city_state" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Address</label>
+                        <textarea name="staff_address" id="edit_staff_address" rows="2" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+                    </div>
+
+                    <!-- System Data -->
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Account Metadata</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">Account Created</span>
+                                <span id="ro_reg_date" class="font-semibold text-slate-700 dark:text-slate-200">--</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">Last Login</span>
+                                <span id="ro_last_login" class="font-semibold text-slate-700 dark:text-slate-200">--</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">Failed Login Attempts</span>
+                                <span id="ro_failed" class="font-semibold text-slate-700 dark:text-slate-200">0</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">Account Lock Status</span>
+                                <span id="ro_lock" class="font-semibold text-slate-700 dark:text-slate-200">None</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">OTP Sent Count</span>
+                                <span id="ro_otp_count" class="font-semibold text-slate-700 dark:text-slate-200">0</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-slate-400">OTP Block Until</span>
+                                <span id="ro_otp_block" class="font-semibold text-slate-700 dark:text-slate-200">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Footer -->
+        <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+            <button type="button" onclick="closeEditModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white transition-colors">Cancel</button>
+            <button type="button" onclick="document.getElementById('editForm').submit()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal (Logout Style) -->
+<div id="confirmModal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" id="confirmBackdrop"></div>
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-sm" id="confirmPanel">
+                <div class="p-6 text-center">
+                    <div id="confirmIconContainer" class="mx-auto flex h-16 w-16 items-center justify-center rounded-full mb-6">
+                        <i id="confirmIcon" class="fa-solid text-2xl"></i>
+                    </div>
+                    <h3 id="confirmTitle" class="text-lg font-bold text-slate-900 dark:text-white mb-2">--</h3>
+                    <p id="confirmDesc" class="text-sm text-slate-500 dark:text-slate-400">--</p>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
+                    <form method="post" id="confirmActionForm">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" id="confirmRecordId" />
+                        <button type="submit" id="confirmBtn" class="inline-flex w-full justify-center rounded-xl px-3 py-2.5 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto transition-colors">
+                            Confirm
+                        </button>
+                    </form>
+                    <button type="button" onclick="closeConfirmModal()" class="mt-3 inline-flex w-full justify-center rounded-xl bg-white dark:bg-slate-800 px-3 py-2.5 text-sm font-semibold text-slate-900 dark:text-slate-200 shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 sm:mt-0 sm:w-auto transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function openEditModal(staff) {
+        document.getElementById('edit_staff_id').value = staff.staff_id;
+        document.getElementById('edit_staff_name').value = staff.staff_name;
+        document.getElementById('edit_staff_email').value = staff.staff_email;
+        document.getElementById('edit_staff_phone').value = staff.staff_phone;
+        document.getElementById('edit_staff_address').value = staff.staff_address || '';
+        document.getElementById('edit_staff_city_state').value = staff.staff_city_state || '';
+        document.getElementById('edit_staff_skill').value = staff.staff_skill || '';
+        document.getElementById('edit_staff_status').value = staff.staff_status.toString();
+        
+        // Audit Mapping
+        document.getElementById('ro_reg_date').innerText = formatDate(staff.staff_register_date);
+        document.getElementById('ro_last_login').innerText = formatDate(staff.staff_last_login, true);
+        document.getElementById('ro_failed').innerText = staff.staff_failed_attempts || 0;
+        document.getElementById('ro_lock').innerText = formatDate(staff.staff_lock_until, true) || "None";
+        document.getElementById('ro_otp_count').innerText = staff.otp_send_count || 0;
+        document.getElementById('ro_otp_block').innerText = formatDate(staff.otp_block_until, true) || "--";
+
+        document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.add('hidden');
+    }
+
+    function openConfirmModal(type, id) {
+        const title = document.getElementById('confirmTitle');
+        const desc = document.getElementById('confirmDesc');
+        const btn = document.getElementById('confirmBtn');
+        const icon = document.getElementById('confirmIcon');
+        const container = document.getElementById('confirmIconContainer');
+        const form = document.getElementById('confirmActionForm');
+        document.getElementById('confirmRecordId').value = id;
+
+        if (type === 'disable') {
+            title.innerText = "Disable Account";
+            desc.innerText = "This user will no longer be able to access the dashboard.";
+            btn.innerText = "Disable User";
+            btn.className = "inline-flex w-full justify-center rounded-xl bg-red-600 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto transition-colors";
+            icon.className = "fa-solid fa-user-xmark text-2xl text-red-600 dark:text-red-500";
+            container.className = "mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 mb-6";
+            form.action = "/Admin/DisableStaff";
+        } else {
+            title.innerText = "Enable Account";
+            desc.innerText = "This user will regain access to the dashboard.";
+            btn.innerText = "Enable User";
+            btn.className = "inline-flex w-full justify-center rounded-xl bg-green-600 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto transition-colors";
+            icon.className = "fa-solid fa-user-check text-2xl text-green-600 dark:text-green-500";
+            container.className = "mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 mb-6";
+            form.action = "/Admin/EnableStaff";
+        }
+
+        document.getElementById('confirmModal').classList.remove('hidden');
+    }
+
+    function closeConfirmModal() {
+        document.getElementById('confirmModal').classList.add('hidden');
+    }
+
+    function formatDate(dateStr, showTime = false) {
+        if (!dateStr || dateStr.includes("0001-01-01")) return "--";
+        try {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return "--";
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            if (showTime) {
+                options.hour = 'numeric';
+                options.minute = '2-digit';
+                options.hour12 = true;
+            }
+            return date.toLocaleString('en-US', options);
+        } catch(e) { return "--"; }
+    }
+
+    window.onclick = function(e) {
+        if (e.target == document.getElementById('editModal')) closeEditModal();
+        if (e.target == document.getElementById('confirmModal')) closeConfirmModal();
+    }
+</script>
+}

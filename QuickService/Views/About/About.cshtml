@@ -1,0 +1,362 @@
+@{
+    ViewData["Title"] =
+        "About QuickService � Trusted Home Appliance Repair Service in Hyderabad";
+
+    ViewData["Description"] =
+        "Learn about QuickService, a trusted home appliance repair platform in Hyderabad offering AC, washing machine, refrigerator, RO, TV & electrician services. Our mission is to provide verified technicians, quick doorstep repair, transparent pricing & reliable customer support.";
+}
+
+@section Styles {
+    <style>
+        /* Responsive Image Fix */
+        #about-page img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* Timeline Connector */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+            transform: translateX(-50%);
+        }
+
+        .dark .timeline-line {
+            background: #374151;
+        }
+
+        @@media (max-width: 768px) {
+            .timeline-line
+
+        {
+            left: 24px;
+            transform: none;
+        }
+
+        }
+    </style>
+}
+
+    <!--
+    =======================================================================
+    SECTION 1: HERO SECTION (Fixed Size & Theme)
+    =======================================================================
+    -->
+    <div class="relative pt-10 pb-14 lg:pt-16 lg:pb-16 overflow-hidden" id="about-page">
+        <!-- Standard Gradient Background -->
+        <div class="absolute inset-0 bg-white dark:bg-gray-900 pointer-events-none -z-10">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-900 dark:to-gray-800 opacity-80"></div>
+        </div>
+
+        <div class="container max-w-7xl mx-auto px-6 lg:px-12 relative z-10 text-center">
+            <!-- Trust Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm mb-8">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <span class="text-xs font-bold tracking-widest uppercase text-gray-500 dark:text-gray-400">Since @SiteData.StartingSince</span>
+            </div>
+
+            <!-- Balanced Heading Size -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
+                Quality Repairs. <br class="hidden sm:block" />
+                <span class="text-blue-600">Honest Pricing.</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                QuickService provides professional, transparent, and warranty-backed repairs.
+                Trusted by @SiteData.TrustedBy homes to keep their lives running smoothly.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#comparison" class="w-full sm:w-auto px-12 py-4 rounded-xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300">
+                    Why Choose Us
+                </a>
+                <a href="#tips" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-bold border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-yellow-500"></i>
+                    <span>Maintenance Tips</span>
+                </a>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-16 max-w-4xl mx-auto px-4">
+                <div class="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur border border-gray-100 dark:border-gray-700">
+                    <div class="text-3xl font-black text-blue-600 mb-1">@SiteData.Experience</div>
+                    <div class="text-xs font-bold text-gray-500 uppercase">Years</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur border border-gray-100 dark:border-gray-700">
+                    <div class="text-3xl font-black text-green-600 mb-1">@SiteData.FixedIssues</div>
+                    <div class="text-xs font-bold text-gray-500 uppercase">Repairs</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur border border-gray-100 dark:border-gray-700">
+                    <div class="text-3xl font-black text-yellow-500 mb-1">@SiteData.Rating</div>
+                    <div class="text-xs font-bold text-gray-500 uppercase">Rating</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur border border-gray-100 dark:border-gray-700">
+                    <div class="text-3xl font-black text-red-600 mb-1">@SiteData.CitiesCovered</div>
+                    <div class="text-xs font-bold text-gray-500 uppercase">Cities</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    =======================================================================
+    SECTION 2: CORPORATE PROFILE
+    =======================================================================
+    -->
+    <section class="py-10 md:py-12 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+        <div class="container max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Office" class="w-full h-auto rounded-3xl shadow-xl">
+                </div>
+                <div class="lg:w-1/2">
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-xs">About Us</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2 mb-6">
+                        Standardizing the <br> <span class="text-blue-600">Repair Industry</span>
+                    </h2>
+                    <div class="prose prose-lg dark:prose-invert text-gray-600 dark:text-gray-400">
+                        <p class="mb-4">
+                            Since 2016, QuickService has been bridging the gap between expensive authorized centers and unreliable local mechanics.
+                        </p>
+                        <p class="mb-4">
+                            We are a unit of <strong>Diamond Enterprises</strong>, bringing corporate-level compliance, GST billing, and background-verified staff to your home.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+    =======================================================================
+    SECTION 2.1: CORE VALUES
+    =======================================================================
+    -->
+    <section class="py-10 md:py-12 bg-gray-50 dark:bg-gray-800/50">
+        <div class="container max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-xs">Our Ethos</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2 mb-4">Driven by Values, <br> Defined by Action</h2>
+                <p class="text-gray-600 dark:text-gray-400">Our core values aren't just wall decorations. They are the decision-making framework for every technician, executive, and support staff member at QuickService.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-scale-balanced text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Radical Integrity</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        We believe in complete transparency. Our pricing is fixed, our billing is GST-compliant, and we never upsell unnecessary parts. If it can be repaired, we won't ask you to replace it.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-green-50 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-shield-halved text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Safety First</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Your home is your sanctuary. We respect that by ensuring every technician is police-verified, background-checked, and trained in hygiene and safety protocols.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-yellow-50 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-bolt text-2xl text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Speed & Reliability</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        A broken appliance disrupts life. We value your time by offering same-day service slots, live technician tracking, and punctual arrivals.
+                    </p>
+                </div>
+
+                <!-- Value 4 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-red-50 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-award text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Technical Excellence</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        We invest heavily in training. Our 'QuickService Academy' ensures our team stays updated with the latest inverter technologies and smart appliance repair methods.
+                    </p>
+                </div>
+
+                <!-- Value 5 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-users text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Customer Obsession</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        We don't just fix machines; we build relationships. Our 7-day support team is always ready to listen, help, and resolve any concerns you might have.
+                    </p>
+                </div>
+
+                <!-- Value 6 -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700 group">
+                    <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-leaf text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Sustainability</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Extending the life of appliances is our contribution to the planet. We promote repair over replacement to reduce electronic waste and environmental impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+    =======================================================================
+    SECTION 3: COMPARISON TABLE
+    =======================================================================
+    -->
+    <section id="comparison" class="py-10 md:py-12 bg-gray-50 dark:bg-gray-900">
+        <div class="container max-w-7xl mx-auto px-6 lg:px-12">
+            <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">Why We Are Better</h2>
+
+            <div class="overflow-hidden bg-white dark:bg-gray-800 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
+                <div class="grid grid-cols-3 bg-gray-900 text-white p-4 sm:p-6 text-sm sm:text-base font-bold">
+                    <div>Features</div>
+                    <div class="text-center opacity-80">Local Mechanic</div>
+                    <div class="text-center text-blue-600">QuickService</div>
+                </div>
+
+                <!-- Rows -->
+                <div class="grid grid-cols-3 p-4 sm:p-6 border-b border-gray-100 dark:border-gray-700 items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                    <div class="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Warranty</div>
+                    <div class="text-center text-gray-800 dark:text-gray-300 text-xs sm:text-sm">None</div>
+                    <div class="text-center font-bold text-green-500 text-xs sm:text-sm">90 Days Written</div>
+                </div>
+                <div class="grid grid-cols-3 p-4 sm:p-6 border-b border-gray-100 dark:border-gray-700 items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                    <div class="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Pricing</div>
+                    <div class="text-center text-gray-800 dark:text-gray-300 text-xs sm:text-sm">Random/Haggle</div>
+                    <div class="text-center font-bold text-green-500 text-xs sm:text-sm">Fixed Rate Card</div>
+                </div>
+                <div class="grid grid-cols-3 p-4 sm:p-6 border-b border-gray-100 dark:border-gray-700 items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                    <div class="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Parts</div>
+                    <div class="text-center text-gray-800 dark:text-gray-300 text-xs sm:text-sm">Used/Compatible</div>
+                    <div class="text-center font-bold text-green-500 text-xs sm:text-sm">100% Genuine OEM</div>
+                </div>
+                <div class="grid grid-cols-3 p-4 sm:p-6 items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                    <div class="font-bold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Safety</div>
+                    <div class="text-center text-gray-800 dark:text-gray-300 text-xs sm:text-sm">Unknown</div>
+                    <div class="text-center font-bold text-green-500 text-xs sm:text-sm">Police Verified</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+    =======================================================================
+    SECTION 4: MAINTENANCE TIPS (Gradient)
+    =======================================================================
+    -->
+    <section id="tips" class="py-10 md:py-16 bg-gradient-to-br from-blue-950 to-gray-900 text-white">
+        <div class="container max-w-7xl mx-auto px-6 lg:px-12">
+            <h2 class="text-3xl font-bold text-center mb-12">Maintenance 101</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white/10 p-8 rounded-2xl border border-white/20 backdrop-blur-sm">
+                    <i class="fa-solid fa-wind text-3xl mb-4 text-blue-200"></i>
+                    <h3 class="text-xl font-bold mb-2">AC Filters</h3>
+                    <p class="text-sm text-blue-100">Clean every 2 weeks. Clogged filters increase power bills by 30%.</p>
+                </div>
+                <div class="bg-white/10 p-8 rounded-2xl border border-white/20 backdrop-blur-sm">
+                    <i class="fa-solid fa-snowflake text-3xl mb-4 text-blue-200"></i>
+                    <h3 class="text-xl font-bold mb-2">Fridge Coils</h3>
+                    <p class="text-sm text-blue-100">Keep 6 inches from wall. Dust on back coils kills the compressor.</p>
+                </div>
+                <div class="bg-white/10 p-8 rounded-2xl border border-white/20 backdrop-blur-sm">
+                    <i class="fa-solid fa-shirt text-3xl mb-4 text-blue-200"></i>
+                    <h3 class="text-xl font-bold mb-2">Washing Machine</h3>
+                    <p class="text-sm text-blue-100">Run a "Tub Clean" cycle monthly with descaler powder.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+    =======================================================================
+    SECTION 3.3: PHOTO GALLERY
+    =======================================================================
+    -->
+
+<section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container max-w-7xl mx-auto px-6 lg:px-12">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Life at QuickService
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+
+            <!-- Large Item -->
+            <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-2xl">
+                <img src="~/images/services-img/technician_repairing_washing_machine.png"
+                     alt="Technician Working"
+                     class="w-full h-full object-cover object-[50%_35%] transition-transform duration-500 group-hover:scale-110">
+
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">On-Site Excellence</span>
+                </div>
+            </div>
+
+            <!-- Standard Item 1 -->
+            <div class="relative group overflow-hidden rounded-2xl">
+                <img src="~/images/services-img/technician_repairing_ac.png"
+                     alt="AC Repair"
+                     class="w-full h-full object-cover object-[50%_45%] transition-transform duration-500 group-hover:scale-110">
+            </div>
+
+            <!-- Standard Item 2 -->
+            <div class="relative group overflow-hidden rounded-2xl">
+                <img src="~/images/services-img/technician_repairing_geyser.png"
+                     alt="Geyser Repair"
+                     class="w-full h-full object-cover object-[50%_50%] transition-transform duration-500 group-hover:scale-110">
+            </div>
+
+
+            <div class="col-span-2 relative group overflow-hidden rounded-2xl">
+                <img src="~/images/ac_repair_hero.png"
+                     alt="Team Meeting"
+                     class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
+
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">Team Strategy</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

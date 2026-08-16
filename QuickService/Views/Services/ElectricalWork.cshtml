@@ -1,0 +1,435 @@
+@{
+    ViewData["Title"] =
+        "Electrician Service in Hyderabad � Wiring, Switch Board, Fan & Light Repair | QuickService";
+
+    ViewData["Description"] =
+        "Book professional electrician service in Hyderabad for wiring repair, switch board fixing, fan & light repair, MCB trip issue, power problem & installation work. QuickService provides verified electricians, quick doorstep service & affordable charges with easy online booking.";
+}
+
+    <!-- Hero Section -->
+    <section class="relative bg-white dark:bg-gray-900 overflow-hidden py-10 lg:py-20 group">
+        <!-- Modern Blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-yellow-400/10 dark:bg-yellow-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-400/10 dark:bg-orange-400/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-center lg:text-left order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 font-medium text-sm mb-6 border border-yellow-100 dark:border-yellow-800">
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                        Top Rated Electricians
+                    </div>
+
+                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+                        Expert <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Electrical</span> Services
+                    </h1>
+
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        From wiring repairs to new installations, our certified electricians ensure safety and reliability for your home and office.
+                        <br><span class="text-sm mt-3 block font-medium text-gray-500 dark:text-gray-400"><i class="fa-solid fa-circle-info mr-1 text-yellow-500"></i> Flat <span class="font-bold text-gray-900 dark:text-white">Rs. @SiteData.VisitCharge</span> visit charge (waived off on service).</span>
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="tel:+919648703048" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all transform hover:-translate-y-1">
+                            <i class="fa-solid fa-phone mr-2"></i> Book Service Now
+                        </a>
+                        <a href="#pricing" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 font-bold rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                            View Pricing
+                        </a>
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-3 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-yellow-500"></i> 45 Min Arrival
+                        </div>
+                        <div class="flex items-center gap-2 p-2">
+                            <i class="fa-solid fa-shield-halved text-green-600"></i> Work Warranty
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-check text-yellow-500"></i> Certified Pros
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image (Constrained) -->
+                <div class="lg:w-1/2 w-full flex justify-center order-1 lg:order-2">
+                    <div class="relative w-full max-w-[550px]">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800 group aspect-[4/3] lg:aspect-[16/10]">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 z-10"></div>
+                        <img src="~/images/services-img/electrician_working.png" alt="Professional Electrician" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-6 left-6 right-6 z-20">
+                                <div class="bg-white/95 dark:bg-gray-900/90 backdrop-blur-md p-4 rounded-xl flex items-center justify-between shadow-lg border border-white/20">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-green-600 dark:text-green-400">
+                                            <i class="fa-solid fa-lightbulb"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500 dark:text-gray-500 uppercase font-bold tracking-wide">Fixed</p>
+                                            <p class="font-semibold text-gray-900 dark:text-white">@SiteData.FixedIssues Issues</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="flex text-yellow-500 text-xs mb-2">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                        <p class="text-xs font-bold text-gray-900 dark:text-white ml-2"> @SiteData.Rating Rating</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl -z-10 animate-pulse"></div>
+                        <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-orange-500/20 rounded-full blur-xl -z-10 animate-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Strip -->
+    <div class="py-8 bg-gray-50 dark:bg-black border-y border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-widest mb-6">Quality Brands We Work With</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-blue-600 cursor-default">HAVELLS</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-black cursor-default">ANCHOR</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-red-600 cursor-default">LEGRAND</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-blue-800 cursor-default">PHILIPS</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-default">SCHNEIDER</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-green-600 cursor-default">CROMPTON</span>
+                <span class="text-lg font-bold text-gray-700 dark:text-gray-300 hover:text-orange-600 cursor-default">ORIENT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diagnostic Hub: Common Issues -->
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 dark:text-yellow-400 font-semibold tracking-wider uppercase text-sm">Diagnosis</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2">Electrical Problems?</h2>
+                <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">We identify and fix electrical faults instantly.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Issue 1 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-br from-white to-yellow-50/30 dark:from-gray-800 dark:to-gray-900 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-600 mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Short Circuit</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Sparks, burning smell, or sudden power outage.</p>
+                </div>
+
+                <!-- Issue 2 -->
+                <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-toggle-off"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Switch Failure</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Switches or sockets not working, loose connections.</p>
+                </div>
+
+                <!-- Issue 3 -->
+                <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center text-yellow-600 mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-fan"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Fan Issues</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Ceiling fan slow speed, wobbling, or noisy.</p>
+                </div>
+
+                <!-- Issue 4 -->
+                <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all group">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center text-purple-600 mb-4 group-hover:scale-110 transition">
+                        <i class="fa-regular fa-lightbulb"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-2">Frequent Trip</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">MCB tripping repeatedly due to overload or fault.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 dark:text-yellow-400 font-semibold tracking-wider uppercase text-sm">Process</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2">How We Work</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Line for desktop -->
+                <div class="hidden md:block absolute top-[28%] left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-gray-200 via-yellow-100 to-gray-200 dark:from-gray-800 dark:to-gray-800 -z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="text-center relative z-10 group">
+                    <div class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full border-4 border-yellow-50 dark:border-gray-700 flex items-center justify-center text-yellow-500 dark:text-yellow-400 text-3xl mb-6 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">1. Diagnosis</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 px-6">Testing circuits and load to find the exact fault.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center relative z-10 group">
+                    <div class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full border-4 border-yellow-50 dark:border-gray-700 flex items-center justify-center text-yellow-500 dark:text-yellow-400 text-3xl mb-6 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">2. Fixing</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 px-6">Repair or replacement of parts with safety standards.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center relative z-10 group">
+                    <div class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full border-4 border-yellow-50 dark:border-gray-700 flex items-center justify-center text-yellow-500 dark:text-yellow-400 text-3xl mb-6 shadow-sm group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">3. Verification</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 px-6">Ensuring proper voltage and functionality before leaving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Services -->
+    <section id="services" class="py-16 md:py-24 bg-gray-50 dark:bg-black relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(#EAB308 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 dark:text-yellow-400 font-semibold tracking-wider uppercase text-sm">Services</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2">Electrical Solutions</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-white hover:to-yellow-50 dark:hover:from-gray-900 dark:hover:to-gray-800 hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 group hover:-translate-y-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center text-2xl group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-plug"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Switch & Socket</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                        Repair or installation of switchboards, sockets, dimmers, and regulators.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> New point installation</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Fixing loose contacts</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Modular switches</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Rs. 149</span>
+                    <a asp-action="ServiceBooking" asp-controller="Booking" class="text-yellow-600 font-semibold hover:tracking-wide transition-all text-sm">Book <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-white hover:to-yellow-50 dark:hover:from-gray-900 dark:hover:to-gray-800 hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 group hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-fan"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Fan Services</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                        Installation, un-installation, and repair of ceiling and exhaust fans.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Regulator change</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Capacitor replacement</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Noisy fan fix</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Rs. 249</span>
+                    <a asp-action="ServiceBooking" asp-controller="Booking" class="text-blue-600 font-semibold hover:tracking-wide transition-all text-sm">Book <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 hover:bg-gradient-to-br hover:from-white hover:to-yellow-50 dark:hover:from-gray-900 dark:hover:to-gray-800 hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800 group hover:-translate-y-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-xl flex items-center justify-center text-2xl group-hover:bg-red-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-house-chimney-crack"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">MCB & Fuse</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                        Replacement of faulty MCBs, fuses, and main distribution board repairs.
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Load balancing</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Short circuit fix</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> New MCB installation</li>
+                    </ul>
+                    <div class="flex items-center justify-between mt-auto pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Rs. 399</span>
+                    <a asp-action="ServiceBooking" asp-controller="Booking" class="text-red-600 font-semibold hover:tracking-wide transition-all text-sm">Book <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Pricing Table -->
+    <section id="pricing" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Standard Labor Charges</h2>
+                <p class="text-gray-600 dark:text-gray-400">Transparent pricing for all electrical works.</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-300 text-sm uppercase tracking-wider">
+                            <th class="p-6 font-semibold">Service Name</th>
+                            <th class="p-6 font-semibold text-right">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700 text-gray-700 dark:text-gray-300">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                            <td class="p-6 font-medium">Inspection / Visit Charge</td>
+                            <td class="p-6 text-right font-bold text-gray-900 dark:text-white">Rs. 250</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                            <td class="p-6 font-medium">Ceiling Fan Installation</td>
+                            <td class="p-6 text-right font-bold text-gray-900 dark:text-white">Rs. 199</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                            <td class="p-6 font-medium">Switch/Socket Replacement (Per Unit)</td>
+                            <td class="p-6 text-right font-bold text-gray-900 dark:text-white">Rs. 99</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                            <td class="p-6 font-medium">MCB Replacement</td>
+                            <td class="p-6 text-right font-bold text-gray-900 dark:text-white">Rs. 349</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                            <td class="p-6 font-medium">Tube Light / Fancy Light Installation</td>
+                            <td class="p-6 text-right font-bold text-gray-900 dark:text-white">Rs. 149</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-8 bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-xl border border-yellow-100 dark:border-yellow-800 flex flex-col md:flex-row gap-4 items-center">
+                <div class="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-800 flex items-center justify-center text-yellow-600 dark:text-yellow-300 shrink-0">
+                    <i class="fa-solid fa-shield-cat"></i>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">30-Day Work Warranty</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">We offer a 30-day warranty on all electrical labor work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section class="py-16 bg-yellow-50/50 dark:bg-yellow-900/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 lg:p-12 shadow-xl border border-yellow-100 dark:border-gray-800 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+                <!-- Blob -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-orange-100/50 dark:bg-orange-900/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+                <div class="w-full md:w-1/2 relative z-10">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Safety Guaranteed</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 shrink-0">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-white text-lg">Verified Electricians</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Background checked professionals with expertise in electrical safety standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 relative z-10 flex justify-center">
+                    <div class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center max-w-xs">
+                        <div class="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-500 text-4xl mb-4">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </div>
+                        <p class="text-xl font-bold text-gray-900 dark:text-white">No-Risk Service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-black">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+            </div>
+
+            <style>
+                details[open] summary .fa-plus {
+                    display: none !important;
+                }
+
+                details[open] summary .fa-minus {
+                    display: block !important;
+                }
+
+                details:not([open]) summary .fa-minus {
+                    display: none !important;
+                }
+            </style>
+
+            <div class="space-y-4">
+                <details class="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-800 [&_summary::-webkit-details-marker]:hidden open:ring-2 open:ring-yellow-500/50 open:shadow-md transition">
+                    <summary class="flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Do you bring your own ladder?</h3>
+                        <span class="ml-4 shrink-0 w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400  group-open:text-yellow-500 transition-colors">
+                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-minus"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed pl-1">
+                        Yes, our electricians carry standard ladders and tools required for general repairs and installations. If a specialized ladder is needed for greater heights, please inform us in advance.
+                    </p>
+                </details>
+
+                <details class="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-800 [&_summary::-webkit-details-marker]:hidden open:ring-2 open:ring-yellow-500/50 open:shadow-md transition">
+                    <summary class="flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Are the spare parts included in the price?</h3>
+                        <span class="ml-4 shrink-0 w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 group-open:text-yellow-500 transition-colors">
+                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-minus"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed pl-1">
+                        No, the listed prices are for labor only. You can provide the spare parts yourself, or our electrician can procure them for you at market rates.
+                    </p>
+                </details>
+
+                <details class="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-800 [&_summary::-webkit-details-marker]:hidden open:ring-2 open:ring-yellow-500/50 open:shadow-md transition">
+                    <summary class="flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Do you do inverter cabling?</h3>
+                        <span class="ml-4 shrink-0 w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 group-open:text-yellow-500 transition-colors">
+                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-minus"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed pl-1">
+                        Yes, we provide full inverter connection and battery maintenance services for homes and offices.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+

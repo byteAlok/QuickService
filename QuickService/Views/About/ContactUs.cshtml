@@ -1,0 +1,348 @@
+@{
+    ViewData["Title"] =
+        "Contact QuickService � Book Appliance Repair & Customer Support in Hyderabad";
+
+    ViewData["Description"] =
+        "Contact QuickService for home appliance repair service in Hyderabad. Call or book online for AC, washing machine, refrigerator, RO, TV & electrician services. Get quick customer support, verified technicians & fast doorstep repair assistance.";
+}
+
+@section Styles {
+    <style>
+        /* Map Grayscale Filter for better aesthetics */
+        iframe {
+            filter: grayscale(100%) invert(0%);
+            transition: filter 0.3s;
+        }
+
+            iframe:hover {
+                filter: grayscale(0%);
+            }
+
+        .dark iframe {
+            filter: grayscale(100%) invert(90%);
+        }
+
+            .dark iframe:hover {
+                filter: grayscale(0%) invert(0%);
+            }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .dark .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+}
+
+    <!--
+    =======================================================================
+    SECTION 1: HERO & INTRO
+    =======================================================================
+    -->
+    <header class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 overflow-hidden">
+        <!-- Background Gradients -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-50 animate-float"></div>
+            <div class="absolute top-40 -left-20 w-72 h-72 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50 animate-float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="container max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 text-xs font-bold tracking-widest uppercase mb-6 border border-blue-100 dark:border-blue-800">
+                24/7 Support Center
+            </span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
+                We're Here to <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Help You.</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Whether you have a question about our services, pricing, or need an urgent repair, our team is ready to answer all your questions.
+            </p>
+    <div class="mt-10">
+        <a asp-action="ServiceBooking" asp-controller="Booking" class="bg-gray-900 dark:bg-gray-200 px-12 py-3 inline-flex items-center gap-2 text-gray-100 dark:text-gray-950 rounded-full font-semibold hover:scale-105 transition-all">
+            Book Repair Online <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+        </div>
+    </header>
+
+    <!--
+    =======================================================================
+    SECTION 2: CONTACT CARDS GRID
+    =======================================================================
+    -->
+    <section class="relative -mt-16 pb-16 z-20">
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card 1: Customer Support -->
+                <div class="glass-card hover:-translate-y-2 transition-transform duration-300 rounded-3xl p-8 shadow-xl">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Customer Support</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">For bookings, status updates, and general inquiries.</p>
+                <a href="tel:+919648703048" class="text-blue-600 font-bold hover:underline decoration-2 underline-offset-4">
+                    +91 96487 03048
+                    </a>
+                </div>
+
+                <!-- Card 2: WhatsApp Chat -->
+                <div class="glass-card hover:-translate-y-2 transition-transform duration-300 rounded-3xl p-8 shadow-xl">
+                    <div class="w-14 h-14 rounded-2xl bg-green-100 dark:bg-green-900/30 text-green-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Chat with Us</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Quick responses for estimates and simple questions.</p>
+                <a href="https://wa.me/919648703048" target="_blank" class="text-green-600 font-bold hover:underline decoration-2 underline-offset-4">
+                        Start Chat &rarr;
+                    </a>
+                </div>
+
+                <!-- Card 3: Email Us -->
+                <div class="glass-card hover:-translate-y-2 transition-transform duration-300 rounded-3xl p-8 shadow-xl">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Email Us</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Send us a detailed message and we'll reply within 24h.</p>
+                <a href="mailto:@SiteData.OwnerEmail" class="text-purple-600 break-all font-bold hover:underline decoration-2 underline-offset-4"> @SiteData.OwnerEmail </a>
+                </div>
+
+                <!-- Card 4: Corporate HQ -->
+                <div class="glass-card hover:-translate-y-2 transition-transform duration-300 rounded-3xl p-8 shadow-xl">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Corporate Office</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6 whitespace-pre-line">
+                    @SiteData.CompanyAddress
+                    </p>
+                    <a href="#map" class="text-orange-600 font-bold hover:underline decoration-2 underline-offset-4">
+                        View Direction &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    @* <!--
+    =======================================================================
+    SECTION 3: CONTACT FORM & MAP 
+    =======================================================================
+    --> *@
+    <section class="py-10 bg-white dark:bg-gray-800 border-y border-gray-100 dark:border-gray-700" id="form">
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="flex items-center">
+                
+                @* <!-- Contact Form -->
+                <div>
+                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">Get a Quote</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Send us a message</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8">
+                        Fill out the form below and our expert team will get back to you within 2 hours with a free estimate.
+                    </p>
+
+                    <form action="#" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Name -->
+                            <div class="relative">
+                                <input type="text" id="name" name="name" placeholder=" " class="block px-4 py-4 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 peer outline-none transition-all" required />
+                                <label for="name" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-2"> Your Name </label>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="relative">
+                                <input type="tel" id="phone" name="phone" placeholder=" " class="block px-4 py-4 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 peer outline-none transition-all" required pattern="[0-9]{10}" />
+                                <label for="phone" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-2"> Phone Number </label>
+                            </div>
+                        </div>
+
+                        <!-- Service Type -->
+                        <div class="relative">
+                            <select id="service" name="service" class="block px-4 py-4 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 peer outline-none transition-all appearance-none">
+                                <option value="" disabled selected>Select Service Required</option>
+                                <option value="ac">AC Repair & Service</option>
+                                <option value="refrigerator">Refrigerator Repair</option>
+                                <option value="washing">Washing Machine Repair</option>
+                                <option value="microwave">Microwave Repair</option>
+                                <option value="tv">LED TV Repair</option>
+                                <option value="ro">RO Water Purifier</option>
+                            </select>
+                            <label for="service" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-blue-600 left-2"> Service Type </label>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="relative">
+                            <textarea id="message" name="message" rows="4" placeholder=" " class="block px-4 py-4 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 peer outline-none transition-all resize-none"></textarea>
+                            <label for="message" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-8 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-2"> Describe your issue (Optional) </label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                            Send Message
+                        </button>
+
+                        <p class="text-xs text-center text-gray-400 mt-4">
+                            By submitting this form, you agree to our <a href="#" class="underline hover:text-blue-600">Terms of Service</a> and <a href="#" class="underline hover:text-blue-600">Privacy Policy</a>.
+                        </p>
+                    </form>
+                </div> *@
+
+                <!-- Map Section -->
+                <div class="relative h-full min-h-[400px] w-full rounded-xl overflow-hidden shadow-inner border border-gray-200 dark:border-gray-600" id="map">
+      
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.254796772077!2d83.16366347519359!3d26.057928077166956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991bd3c48ae7ee9%3A0x6163fe731494a3dd!2sChak%20Goraya!5e0!3m2!1sen!2sin!4v1771916205851!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="absolute inset-0">
+                    </iframe>
+
+                    <!-- Location Floating Card -->
+                    <div class="absolute bottom-6 left-6 right-6 bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                        <p class="font-bold text-gray-900 dark:text-white text-sm">House No. 184 Chak Goraya Harabanshpur</p>
+                        <p class="text-xs text-gray-500">
+                            @SiteData.CompanyAddress
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+  @*   <!--
+    =======================================================================
+    SECTION 4: REGIONAL OFFICES
+    =======================================================================
+    --> *@
+    @* <section class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-bold tracking-wider uppercase text-xs">Our Presence</span>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mt-2">Regional Offices</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Noida Office -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Noida (HQ)</h3>
+                        <span class="px-2 py-1 rounded text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700">Open</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                        Sector 62, Electronic City,<br>
+                        Noida, Uttar Pradesh 201301
+                    </p>
+                    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <i class="fa-solid fa-phone text-blue-600"></i>
+                        <span>+91 98765 43210</span>
+                    </div>
+                </div>
+
+                <!-- Delhi Office -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">South Delhi</h3>
+                        <span class="px-2 py-1 rounded text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700">Open</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                        Kalkaji Main Market,<br>
+                        New Delhi, Delhi 110019
+                    </p>
+                    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <i class="fa-solid fa-phone text-blue-600"></i>
+                        <span>011-4567-8900</span>
+                    </div>
+                </div>
+
+                <!-- Gurgaon Office -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-colors group cursor-default">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Gurgaon</h3>
+                        <span class="px-2 py-1 rounded text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700">Open</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                        DLF Cyber City, Phase 2,<br>
+                        Gurugram, Haryana 122002
+                    </p>
+                    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <i class="fa-solid fa-phone text-blue-600"></i>
+                        <span>0124-4567-8900</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section> *@
+
+    <!--
+    =======================================================================
+    SECTION 5: FAQ & Help
+    =======================================================================
+    -->
+    <section class="py-16 md:py-24 bg-blue-50 dark:bg-black/20 border-t border-gray-200 dark:border-gray-800">
+        <div class="container max-w-4xl mx-auto px-6 text-center">
+
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/20 text-blue-600 text-2xl mb-6 animate-pulse-slow">
+                <i class="fa-solid fa-question"></i>
+            </div>
+
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Have Questions?</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-10">
+                Check our Frequently Asked Questions for quick answers about pricing, warranty, and service areas.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <!-- FAQ Item 1 -->
+            <a asp-action="FrequentlyAskedQuestion" asp-controller="About" class="block p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-all">
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-1"><i class="fa-regular fa-clock mr-2 text-gray-400"></i> What are your working hours?</h4>
+                    <p class="text-sm text-gray-500 ml-6">We are open 7 days a week, 9 AM to 8 PM.</p>
+                </a>
+
+                <!-- FAQ Item 2 -->
+            <a asp-action="Pricing" asp-controller="About" class="block p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-all">
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-1"><i class="fa-solid fa-tag mr-2 text-gray-400"></i> How much is the visit charge?</h4>
+                    <p class="text-sm text-gray-500 ml-6">Visit charges start at Rs.199 depending on the appliance.</p>
+                </a>
+
+                <!-- FAQ Item 3 -->
+            <a asp-action="ContactUs" asp-controller="About" class="block p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-all">
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-1"><i class="fa-solid fa-map-pin mr-2 text-gray-400"></i> Which areas do you serve?</h4>
+                    <p class="text-sm text-gray-500 ml-6">We cover all major areas in Hyderabad</p>
+                </a>
+
+                <!-- FAQ Item 4 -->
+            <a asp-action="FrequentlyAskedQuestion" asp-controller="About" class="block p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-600 transition-all">
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-1"><i class="fa-solid fa-shield-halved mr-2 text-gray-400"></i> Do you provide warranty?</h4>
+                    <p class="text-sm text-gray-500 ml-6">Yes, 30-90 days warranty on spare parts.</p>
+                </a>
+            </div>
+
+            <div class="mt-10">
+            <a asp-action="FrequentlyAskedQuestion" asp-controller="About" class="bg-gray-900 dark:bg-gray-200 px-12 py-3 inline-flex items-center gap-2 text-gray-100 dark:text-gray-950 rounded-full font-semibold hover:scale-105 transition-all">
+                    View All FAQs <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+         
+
+        </div>
+    </section>
+

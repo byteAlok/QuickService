@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Core -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@(ViewData["Title"] ?? "QuickService Internal")</title>
+
+    <!-- Prevent indexing -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#4f46e5" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/icons/apple-icon-180.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="~/applicationManifest.json">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-header {
+            background: rgba(17, 24, 39, 0.7);
+            border-bottom: 1px solid rgba(31, 41, 55, 1);
+        }
+
+        .premium-bg-container {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0; pointer-events: none; overflow: hidden;
+        }
+        .glare-circle-1, .glare-circle-2, .glare-circle-3 {
+            position: absolute; border-radius: 50%; opacity: 0.15; 
+            mix-blend-mode: multiply; filter: blur(120px);
+        }
+        .dark .glare-circle-1, .dark .glare-circle-2, .dark .glare-circle-3 {
+            opacity: 0.1; mix-blend-mode: screen;
+        }
+        .glare-circle-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #818cf8; animation: pulse 6s infinite; }
+        .glare-circle-2 { top: 20%; right: -10%; width: 40vw; height: 40vw; background: #22d3ee; animation: pulse 4s infinite; }
+        .glare-circle-3 { bottom: -20%; left: 20%; width: 60vw; height: 60vw; background: #e879f9; animation: pulse 5s infinite; }
+        
+        @@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        .brand-icon-bg {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .dark .brand-icon-bg {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .brand-text {
+            background: linear-gradient(to right, #3b82f6, #06b6d4);
+            -webkit-background-clip: text; color: transparent;
+            font-weight: 700; font-size: 1.35rem; letter-spacing: -0.025em;
+        }
+        .dark .brand-text {
+            background: linear-gradient(to right, #60a5fa, #22d3ee);
+            -webkit-background-clip: text; color: transparent;
+        }
+        .pill-internal {
+            background: #e0e7ff; color: #4338ca;
+            padding: 3px 8px; border-radius: 6px;
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; margin-left: 8px; vertical-align: middle;
+        }
+        .dark .pill-internal {
+            background: rgba(49, 46, 129, 0.5); color: #a5b4fc; border: 1px solid rgba(67, 56, 202, 0.3);
+        }
+        
+        /* Layout resets to match standard */
+        .layout-footer {
+            position: relative; z-index: 10;
+            background: rgba(255, 255, 255, 0.4); border-top: 1px solid rgba(229, 231, 235, 0.5);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 1.5rem; text-align: center; color: #6b7280; font-size: 0.875rem;
+        }
+        .dark .layout-footer {
+            background: rgba(17, 24, 39, 0.4); border-top: 1px solid rgba(31, 41, 55, 0.5);
+            color: #9ca3af;
+        }
+        .flex-row-between { display: flex; align-items: center; justify-content: space-between; }
+        
+        /* Nav buttons */
+        .nav-btn {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+            border-radius: 0.75rem; font-size: 0.875rem; font-weight: 500;
+            background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(229, 231, 235, 0.9);
+            color: #4b5563; transition: all 0.3s;
+        }
+        .dark .nav-btn {
+            background: rgba(31, 41, 55, 0.7); border: 1px solid rgba(55, 65, 81, 0.9);
+            color: #d1d5db;
+        }
+        .nav-btn:hover { background: #f3f4f6; color: #111827; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .dark .nav-btn:hover { background: #374151; color: #f9fafb; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .theme-btn {
+            padding: 0.5rem; border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(229, 231, 235, 0.9);
+            transition: all 0.3s; color: #4b5563;
+        }
+        .dark .theme-btn {
+            background: rgba(31, 41, 55, 0.7); border: 1px solid rgba(55, 65, 81, 0.9);
+            color: #d1d5db;
+        }
+        .theme-btn:hover { background: #f3f4f6; color: #f59e0b; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .dark .theme-btn:hover { background: #374151; color: #facc15; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    </style>
+
+    <!-- Prevent dark flicker -->
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col transition-colors duration-500 relative">
+
+    <div class="premium-bg-container">
+        <div class="glare-circle-1"></div>
+        <div class="glare-circle-2"></div>
+        <div class="glare-circle-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-header sticky top-0 px-6 py-3 z-[60]">
+        <div class="flex-row-between max-w-7xl mx-auto">
+
+            <!-- Brand -->
+            <div style="display: flex; align-items: center; gap: 0.75rem; cursor: default;">
+                @* <div class="brand-icon-bg">
+                    <svg style="width: 26px; height: 26px;" viewBox="0 0 24 24" fill="url(#brand-grad)">
+                        <defs>
+                            <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#06b6d4" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="0.5" class="text-blue-200 dark:text-blue-900"/>
+                    </svg>
+                </div> *@
+                <div style="font-weight: 800; font-size: 1.35rem; letter-spacing: -0.025em; display: flex; align-items: center;">
+                    @* <span class="text-gray-900 dark:text-blue-200">Appliance</span>
+                    <span style="color: #0ea5e9;" class="dark:text-cyan-400">Care</span> *@
+
+                    <a href="/login">
+                        <!-- Light Mode Logo -->
+                        <img src="~/icons/QuickServiceLogo.png" alt="QuickService"
+                             class="block dark:hidden w-48 sm:w-54 lg:w-60 xl:w-64" />
+
+                        <!-- Dark Mode Logo -->
+                        <img src="~/icons/QuickServiceLogo_White.png" alt="QuickService"
+                             class="hidden dark:block w-48 sm:w-54 lg:w-60 xl:w-64" />
+                    </a>
+                    <span class="pill-internal">Login</span>
+                </div>
+            </div>
+
+            <!-- Right Section -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+
+                <!-- Return to Website -->
+                <a href="@Url.Action("Index", "Home")" class="nav-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="hidden sm:inline">Go to Website</span>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="theme-btn">
+                    <!-- Moon -->
+                    <svg id="moonIcon" style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                    <!-- Sun -->
+                    <svg id="sunIcon" style="width: 20px; height: 20px; display: none;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M6.05 17.95l-1.414 1.414m12.728 0l-1.414-1.414M6.05 6.05L4.636 4.636M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10 py-12">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="layout-footer">
+        <div class="flex-row-between" style="max-width: 80rem; margin: 0 auto;">
+            <p style="margin: 0;">© @DateTime.Now.Year QuickService. All rights reserved.</p>
+            <p style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="position: relative; display: flex; width: 10px; height: 10px;">
+                  <span style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: #4ade80; opacity: 0.75; animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+                  <span style="position: relative; width: 10px; height: 10px; border-radius: 50%; background: #22c55e;"></span>
+                </span>
+                Internal Operations System
+            </p>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Toggle Script -->
+    <script>
+        const toggleBtn = document.getElementById("themeToggle");
+        const moonIcon = document.getElementById("moonIcon");
+        const sunIcon = document.getElementById("sunIcon");
+
+        // Initialization
+        if (document.documentElement.classList.contains("dark")) {
+            moonIcon.style.display = "none";
+            sunIcon.style.display = "block";
+        }
+
+        toggleBtn.addEventListener("click", function () {
+            document.documentElement.classList.toggle("dark");
+            
+            if (document.documentElement.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+                moonIcon.style.display = "none";
+                sunIcon.style.display = "block";
+            } else {
+                localStorage.setItem("theme", "light");
+                moonIcon.style.display = "block";
+                sunIcon.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

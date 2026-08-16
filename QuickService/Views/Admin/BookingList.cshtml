@@ -1,0 +1,240 @@
+﻿@model IEnumerable<QuickService.Models.BookingModel>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "All Bookings";
+}
+
+@section Styles {
+<style>
+    /* Professional Scrollbar (Thinner) */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 3px; /* Reduced from 8px */
+        height: 8px; /* Reduced from 8px */
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #cbd5e1; /* slate-300 */
+        border-radius: 4px; 
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #475569; /* slate-600 */
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #94a3b8; /* slate-400 */
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #64748b; /* slate-500 */
+    }
+</style>
+}
+<div class="flex flex-col h-[calc(100vh-theme(spacing.32))] bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 m-6 transition-colors">
+    
+    <!-- Toolbar -->
+    <div class="p-4 border-b border-slate-200 dark:border-slate-700 flex flex-wrap gap-4 items-center justify-between">
+        <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">Booking Management</h1>
+        
+        <form method="get" asp-action="AdminBookingList" asp-controller="Booking" class="flex flex-wrap items-center gap-3">
+
+            @Html.AntiForgeryToken()
+
+            <!-- Status Filter -->
+            <div class="relative">
+                <select name="status" onchange="this.form.submit()" class="appearance-none pl-3 pr-8 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="All" selected="@(ViewBag.CurrentStatus == "All")">All Statuses</option>
+                    <option value="Pending" selected="@(ViewBag.CurrentStatus == "Pending")">Pending</option>
+                    <option value="Completed" selected="@(ViewBag.CurrentStatus == "Completed")">Completed</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Date Filter -->
+            <div class="relative">
+                <button type="button" onclick="document.getElementById('date-filter-dropdown').classList.toggle('hidden')" class="pl-3 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-slate-400"></i>
+                    <span>@(ViewBag.CurrentDateRange == "All" ? "Date Range" : ViewBag.CurrentDateRange)</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
+                </button>
+                <div id="date-filter-dropdown" class="hidden absolute top-full left-0 mt-1 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-100 dark:border-slate-700 py-1 z-20">
+                    <a href="?dateRange=All&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">All Time</a>
+                    <a href="?dateRange=Today&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Today</a>
+                    <a href="?dateRange=Yesterday&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Yesterday</a>
+                    <a href="?dateRange=Last24Hours&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Last 24 Hours</a>
+                    <a href="?dateRange=ThisWeek&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">This Week</a>
+                    <a href="?dateRange=Last7Days&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Last 7 Days</a>
+                    <a href="?dateRange=ThisMonth&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">This Month</a>
+                    <a href="?dateRange=Last30Days&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Last 30 Days</a>
+                    <a href="?dateRange=Last3Months&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700">Last 3 Months</a>
+                </div>
+            </div>
+
+            <!-- Created By -->
+            <div class="relative">
+                <select name="createdBy" onchange="this.form.submit()" class="appearance-none pl-3 pr-8 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="All" selected="@(ViewBag.CurrentCreatedBy == "All")">Created By: All</option>
+                    <option value="Admin" selected="@(ViewBag.CurrentCreatedBy == "Admin")">Admin</option>
+                    <option value="Staff" selected="@(ViewBag.CurrentCreatedBy == "Staff")">Staff</option>
+                    <option value="User" selected="@(ViewBag.CurrentCreatedBy == "User")">Online</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+            
+            <a href="/Admin/ManualBooking" class="ml-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-plus"></i>
+                <span>New Booking</span>
+            </a>
+        </form>
+    </div>
+
+    <!-- Wide Table Container -->
+    <div class="flex-1 overflow-auto w-full custom-scrollbar">
+        <table class="w-full min-w-[1600px] text-sm text-left border-collapse">
+            <thead class="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10 shadow-sm">
+                <tr>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-16">S.No</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-24">ID</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-32">Date</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-28">Status</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-64">Customer & Contact</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-48">Product Info</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-64">Issue</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-48">Service Details</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-32">Timing</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-24">Priority</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-32">Created By</th>
+                    <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider bg-slate-50 dark:bg-slate-900 w-24 sticky right-0 shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.1)] dark:shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.3)]">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+
+                @{
+                    int i = 0;
+                    var staffNames = ViewBag.StaffNames as Dictionary<int, string>;
+                    var adminNames = ViewBag.AdminNames as Dictionary<int, string>;
+                }
+                @if (Model != null && Model.Any())
+                {
+                @foreach (var booking in Model)
+                {
+                    <tr class="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-colors">
+                        <td class="px-4 py-3 text-slate-500 font-mono">@(((ViewBag.CurrentPage - 1) * 10) + (++i))</td>
+                        <td class="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">#BK-@booking.id.ToString()</td>
+                        <td class="px-4 py-3 text-slate-600 dark:text-slate-300">@QuickService.Helpers.TimeHelper.ConvertToIst(booking.BookingDate).ToString("MMM dd, yyyy hh:mm tt")</td>
+                        <td class="px-4 py-3">
+                            <span id="status-badge-@booking.id" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                @(booking.service_status == "Pending" ? "bg-blue-100 text-blue-800 border border-blue-200 dark:bg-blue-900/50 dark:text-blue-200 dark:border-blue-800" : 
+                                  booking.service_status == "Completed" ? "bg-green-100 text-green-800 border border-green-200 dark:bg-green-900/50 dark:text-green-200 dark:border-green-800" : 
+                                  "bg-slate-100 text-slate-800 border border-slate-200 dark:bg-slate-900/50 dark:text-slate-200 dark:border-slate-800")">
+                                @(booking.service_status ?? "New")
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="font-bold text-slate-800 dark:text-slate-100">@booking.full_name</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">@booking.email</div>
+                            <div class="text-sm font-medium text-blue-600 dark:text-blue-400 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1"></i>@booking.phone_number</div>
+                            @if (!string.IsNullOrEmpty(booking.alt_phone_number))
+                            {
+                                <div class="text-xs text-slate-500 dark:text-slate-400"><i class="fa-solid fa-phone-flip text-[10px] mr-1"></i>@booking.alt_phone_number</div>
+                            }
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="text-slate-800 dark:text-slate-100 font-bold">@booking.brand</div>
+                            <div class="text-sm text-slate-600 dark:text-slate-300">@booking.product_category</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">@booking.sub_category</div>
+                            <div class="text-[10px] uppercase font-bold text-slate-400 mt-1 border border-slate-200 dark:border-slate-700 rounded px-1 w-fit">@booking.warranty_status</div>
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="text-slate-700 dark:text-slate-200 font-medium">@booking.issue_type</div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2" title="@booking.issue_description">@booking.issue_description</p>
+                        </td>
+                        <td class="px-4 py-3 text-slate-600 dark:text-slate-300">
+                            <div class="font-medium">@booking.address</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">
+                                @booking.city, @booking.pin_code
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-slate-600 dark:text-slate-300">
+                            <div class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500">@booking.preferred_day</div>
+                            <div class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500">@booking.custom_date</div>
+                            <div class="text-sm">@booking.time_slot</div>
+                        </td>
+                        <td class="px-4 py-3">
+                                @if (booking.priority == null || booking.priority == "" )
+                                {
+                                    <span class="text-gray-500 dark:text-gray-500 font-medium text-[10px] uppercase tracking-wide border border-current px-1 rounded">None</span>
+                                }
+                                else {
+                                <span class="@(booking.priority == "Urgent" ? "text-red-600 dark:text-red-400" : 
+                                          booking.priority == "Medium" ? "text-amber-600 dark:text-amber-400" : "text-pink-600 dark:text-pink-300") font-bold text-[10px] uppercase tracking-wide border border-current px-1 rounded">@booking.priority</span>
+                                }
+                        </td>
+                        <td class="px-4 py-3 text-slate-500 dark:text-slate-400 text-xs">
+                 
+                            @if (booking.BookingBy == "Staff")
+                            {
+                                <div class="font-bold text-slate-700 dark:text-slate-200">@(staffNames != null && staffNames.ContainsKey(booking.foreign_key_id.GetValueOrDefault()) ? staffNames[booking.foreign_key_id.GetValueOrDefault()] : "Staff")</div>
+                                <div class="text-[10px] opacity-75">Staff ID: @booking.foreign_key_id</div> 
+                            }
+                            else if (booking.BookingBy == "Admin")
+                            {
+                                <div class="font-bold text-slate-700 dark:text-slate-200">@(adminNames != null && adminNames.ContainsKey(booking.foreign_key_id.GetValueOrDefault()) ? adminNames[booking.foreign_key_id.GetValueOrDefault()] : "Admin")</div>
+                                <div class="text-[10px] opacity-75">Admin ID: @booking.foreign_key_id</div>
+                            }
+                            else
+                            {
+                                <div class="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-tighter">Online User</div>
+                            }
+                        </td>
+                        <td class="px-4 py-3 sticky right-0 bg-white dark:bg-slate-800 group-hover:bg-blue-50/50 dark:group-hover:bg-blue-900/20 shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.05)] dark:shadow-[-4px_0_8px_-2px_rgba(0,0,0,0.3)]">
+                            <div class="flex flex-col items-center gap-2">
+                                <div id="action-cell-@booking.id">
+                                @if (booking.service_status == "Pending")
+                                {
+                                    <button onclick="updateBookingStatus(@booking.id)" id="complete-btn-@booking.id" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-full shadow-sm transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap" title="Mark as Completed">
+                                        <i class="fa-solid fa-check"></i>
+                                        <span>Complete</span>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <span class="text-emerald-600 dark:text-emerald-400 font-semibold text-xs uppercase tracking-widest"><i class="fa-solid fa-circle-check mr-1"></i>DONE</span>
+                                }
+                                </div>
+                                <button onclick="shareMessageStatus(@booking.id)" id="share-btn-@booking.id" class="flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-pink-600 text-white text-sm font-semibold rounded-full shadow-sm transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap" title="Mark as Share">
+                                        <i class="fa-solid fa-share"></i>
+                                        <span>Share</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="p-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between bg-white dark:bg-slate-800 rounded-b-xl">
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+            Showing <span class="font-medium text-slate-700 dark:text-slate-200">@((ViewBag.CurrentPage - 1) * 10 + 1)</span> to <span class="font-medium text-slate-700 dark:text-slate-200">@(Math.Min(ViewBag.CurrentPage * 10, ViewBag.TotalRecords))</span> of <span class="font-medium text-slate-700 dark:text-slate-200">@ViewBag.TotalRecords</span> results
+        </p>
+        <div class="flex gap-2">
+            <a href="?page=@(ViewBag.CurrentPage - 1)&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy&dateRange=@ViewBag.CurrentDateRange" 
+               class="px-3 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 @(ViewBag.CurrentPage <= 1 ? "opacity-50 pointer-events-none" : "")">Previous</a>
+            
+            <a href="?page=@(ViewBag.CurrentPage + 1)&status=@ViewBag.CurrentStatus&createdBy=@ViewBag.CurrentCreatedBy&dateRange=@ViewBag.CurrentDateRange" 
+               class="px-3 py-1 text-sm border border-slate-300 dark:border-slate-600 rounded hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 @(ViewBag.CurrentPage >= ViewBag.TotalPages ? "opacity-50 pointer-events-none" : "")">Next</a>
+        </div>
+    </div>
+</div>
+
+<partial name="~/Views/Components/_SharedModal.cshtml" />
+
+@section Scripts {
+    <script src="~/js/booking-share.js"></script>
+}

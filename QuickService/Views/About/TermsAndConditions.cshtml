@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] =
+        "Terms & Conditions � Appliance Repair Service Usage Policy | QuickService";
+
+    ViewData["Description"] =
+        "Read QuickService's terms and conditions to understand service usage policies, booking rules, technician visits, payments, cancellations and responsibilities. Our transparent terms ensure a smooth and reliable appliance repair experience.";
+}
+@section Styles {
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+   }
+
+    <!-- Header -->
+    <header class="bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-900 dark:to-gray-800 border-b border-gray-200 dark:border-gray-800 py-10">
+        <div class="container max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">Terms of Service</h1>
+            <p class="text-gray-500 dark:text-gray-400">Effective Date: January 15, 2026</p>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="container max-w-6xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+            <!-- Sidebar -->
+            <aside class="lg:col-span-3">
+                <div class="sticky top-24 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <h3 class="font-bold text-gray-900 dark:text-white mb-4 uppercase text-xs tracking-wider">Contents</h3>
+                    <nav class="space-y-3 text-sm">
+                        <a href="#agreement" class="block text-blue-600 font-medium hover:underline">1. Agreement to Terms</a>
+                        <a href="#services" class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">2. Service Policy</a>
+                        <a href="#payment" class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">3. Payments & Refunds</a>
+                        <a href="#warranty" class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">4. Warranty Terms</a>
+                        <a href="#cancellation" class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">5. Cancellations</a>
+                        <a href="#liability" class="block text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">6. Liability</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Text -->
+            <main class="lg:col-span-9 font-serif text-gray-700 dark:text-gray-300 leading-relaxed space-y-12">
+
+                <section id="agreement">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Agreement to Terms</h2>
+                    <p class="mb-4">
+                        These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and QuickService ("we," "us," or "our"), concerning your access to and use of the @SiteData.SiteUrl website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the "Site").
+                    </p>
+                    <p>
+                        You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Service. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF SERVICE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+                    </p>
+                </section>
+
+                <section id="services">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">2. Service Policy</h2>
+                    <p class="mb-4">
+                        QuickService provides third-party repair and maintenance services for home appliances. We are an independent service provider and are not directly affiliated with any manufacturing brands, unless explicitly stated.
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Our technicians will inspect the appliance and provide an estimate before starting work.</li>
+                        <li>Any extra spare parts required will be charged additionally as per actuals.</li>
+                        <li>We reserve the right to refuse service in cases of hazardous working conditions or abusive behavior.</li>
+                    </ul>
+                </section>
+
+                <section id="payment">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Payments & Refunds</h2>
+                    <p class="mb-4">
+                        <strong>Visit Charges:</strong> A minimum visiting/diagnosis charge applies if you choose not to proceed with the repair after inspection. This charge covers the technician's time and travel.
+                    </p>
+                    <p class="mb-4">
+                        <strong>Billing:</strong> Final payments must be made immediately upon completion of the service via Cash, UPI, or other digital modes accepted by the technician.
+                    </p>
+                </section>
+
+                <section id="warranty">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Warranty Terms</h2>
+                    <p class="mb-4">
+                        We stand by the quality of our work. Warranty coverage is as follows:
+                    </p>
+                    <div class="overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg mb-4 font-sans">
+                        <table class="min-w-full text-sm">
+                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th class="px-6 py-3 text-left font-bold text-gray-900 dark:text-white">Item</th>
+                                    <th class="px-6 py-3 text-left font-bold text-gray-900 dark:text-white">Warranty Period</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr>
+                                    <td class="px-6 py-3">Service / Labour</td>
+                                    <td class="px-6 py-3 text-green-600 font-bold">30 Days</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-3">Spare Parts</td>
+                                    <td class="px-6 py-3 text-green-600 font-bold">30 - 90 Days (Depending on part)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm italic">Note: Warranty is void if the appliance is opened or tampered with by any other technician or individual during the warranty period.</p>
+                </section>
+
+                <section id="cancellation">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Cancellations</h2>
+                    <p>
+                        You may cancel or reschedule your appointment without any penalty up to 2 hours before the scheduled time. Cancellations made within 2 hours of the slot may attract a nominal cancellation fee at our discretion.
+                    </p>
+                </section>
+
+                <section id="liability">
+                    <h2 class="font-sans text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Limitation of Liability</h2>
+                    <p>
+                        In no event will we be liable for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit, lost revenue, loss of data, or other damages arising from your use of the service, even if we have been advised of the possibility of such damages.
+                    </p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+

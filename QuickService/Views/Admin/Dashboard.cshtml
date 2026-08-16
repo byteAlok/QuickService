@@ -1,0 +1,194 @@
+﻿@model IEnumerable<QuickService.Models.BookingModel>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="max-w-7xl mx-auto space-y-10">
+
+    <!-- Page Header -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-xl font-semibold text-slate-600 dark:text-slate-100">
+                Admin Overview
+            </h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+                Daily snapshot of bookings & operations
+            </p>
+        </div>
+
+        <a href="/Admin/ManualBooking"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg
+                  bg-blue-600 text-white text-sm font-medium
+                  hover:bg-blue-700 transition shadow-sm flex-shrink-0">
+            <i class="fa-solid fa-plus"></i>
+            New Booking
+        </a>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-2">
+
+        <!-- Total Bookings -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Total Bookings</p>
+                    <p class="mt-2 text-3xl font-bold text-slate-800 dark:text-white">@ViewBag.TotalBookings</p>
+                </div>
+                <div class="h-12 w-12 flex-shrink-0 rounded-xl bg-blue-100 dark:bg-blue-500/10
+                            flex items-center justify-center text-blue-600">
+                    <i class="fa-solid fa-calendar-check text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Pending Requests</p>
+                    <p class="mt-2 text-3xl font-bold text-slate-800 dark:text-white">@ViewBag.PendingBookings</p>
+                </div>
+                <div class="h-12 w-12 flex-shrink-0 rounded-xl bg-amber-100 dark:bg-amber-500/10
+                            flex items-center justify-center text-amber-600">
+                    <i class="fa-solid fa-clock text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Completed</p>
+                    <p class="mt-2 text-3xl font-bold text-slate-800 dark:text-white">@ViewBag.CompletedBookings</p>
+                </div>
+                <div class="h-12 w-12 flex-shrink-0 rounded-xl bg-emerald-100 dark:bg-emerald-500/10
+                            flex items-center justify-center text-emerald-600">
+                    <i class="fa-solid fa-circle-check text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 hover:shadow-md transition">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Active Staff</p>
+                    <p class="mt-2 text-3xl font-bold text-slate-800 dark:text-white">@ViewBag.TotalStaff</p>
+                </div>
+                <div class="h-12 w-12 flex-shrink-0 rounded-xl bg-indigo-100 dark:bg-indigo-500/10
+                            flex items-center justify-center text-indigo-600">
+                    <i class="fa-solid fa-users text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Admins (SuperAdmin Only) -->
+        @if (User.IsInRole("SuperAdmin"))
+        {
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-slate-500">Total Admins</p>
+                        <p class="mt-2 text-3xl font-bold text-slate-800 dark:text-white">@ViewBag.TotalAdmins</p>
+                    </div>
+                    <div class="h-12 w-12 flex-shrink-0 rounded-xl bg-rose-100 dark:bg-rose-500/10
+                                flex items-center justify-center text-rose-600">
+                        <i class="fa-solid fa-user-shield text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Recent Bookings Table Section -->
+    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Recent Bookings</h2>
+                <p class="text-xs text-slate-500 mt-1">Latest customer requests</p>
+            </div>
+            <a asp-action="AdminBookingList" asp-controller="Booking" class="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">View All →</a>
+        </div>
+        
+        <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-sm text-left border-collapse">
+                <thead class="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                    <tr>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">ID</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Date</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Status</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Customer & Contact</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Product Info</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Issue</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider">Location</th>
+                        <th class="px-4 py-3 font-semibold text-xs uppercase tracking-wider text-right">Created By</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        var staffNames = ViewBag.StaffNames as Dictionary<int, string>;
+                        var adminNames = ViewBag.AdminNames as Dictionary<int, string>;
+
+                        @foreach (var booking in Model)
+                        {
+                            <tr class="hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-colors">
+                                <td class="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">#BK-@booking.id.ToString()</td>
+                                <td class="px-4 py-3 text-slate-600 dark:text-slate-300">@QuickService.Helpers.TimeHelper.ConvertToIst(booking.BookingDate).ToString("MMM dd, yyyy")</td>
+                                <td class="px-4 py-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                        @(booking.service_status == "Pending" ? "bg-blue-100 text-blue-800 border border-blue-200 dark:bg-blue-900/50 dark:text-blue-200 dark:border-blue-800" : 
+                                          booking.service_status == "Completed" ? "bg-green-100 text-green-800 border border-green-200 dark:bg-green-900/50 dark:text-green-200 dark:border-green-800" : 
+                                          "bg-slate-100 text-slate-800 border border-slate-200 dark:bg-slate-900/50 dark:text-slate-200 dark:border-slate-800")">
+                                        @(booking.service_status ?? "New")
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="font-bold text-slate-800 dark:text-slate-100">@booking.full_name</div>
+                                    <div class="text-sm font-medium text-blue-600 dark:text-blue-400 mt-1">@booking.phone_number</div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="text-slate-800 dark:text-slate-100 font-bold">@booking.brand</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400">@booking.product_category</div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="text-slate-700 dark:text-slate-200 font-medium">@booking.issue_type</div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">@booking.issue_description</p>
+                                </td>
+                                <td class="px-4 py-3 text-slate-600 dark:text-slate-300">
+                                    <div class="font-medium text-xs">@booking.address</div>
+                                    <div class="text-[10px] text-slate-400">@booking.city</div>
+                                </td>
+                                <td class="px-4 py-3 text-right">
+                                    @if (booking.BookingBy == "Staff")
+                                    {
+                                        <div class="font-bold text-slate-700 dark:text-slate-200 text-xs">@(staffNames != null && staffNames.ContainsKey(booking.foreign_key_id.GetValueOrDefault()) ? staffNames[booking.foreign_key_id.GetValueOrDefault()] : "Staff")</div>
+                                        <div class="text-[10px] opacity-75">Staff ID: @booking.foreign_key_id</div> 
+                                    }
+                                    else if (booking.BookingBy == "Admin")
+                                    {
+                                        <div class="font-bold text-slate-700 dark:text-slate-200 text-xs">@(adminNames != null && adminNames.ContainsKey(booking.foreign_key_id.GetValueOrDefault()) ? adminNames[booking.foreign_key_id.GetValueOrDefault()] : "Admin")</div>
+                                        <div class="text-[10px] opacity-75">Admin ID: @booking.foreign_key_id</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-tighter text-[10px]">Online User</div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="px-6 py-10 text-center text-slate-400">No recent bookings found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
