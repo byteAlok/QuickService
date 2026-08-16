@@ -85,4 +85,8 @@ _ReSharper*/
 # Database local files
 *.mdf
 *.ldf
+<<<<<<< HEAD
 *.ndf
+=======
+*.ndf
+>>>>>>> e5ae592c769e930537a32e0aa6ce85c86f8d2b7f
