@@ -3,14 +3,14 @@
     public static class SiteData
     {
         public const string CompanyName = "QuickService";
-        public const string CompanyEmail = "support@aloksde.com";
+        public const string CompanyEmail = "contact@aloksde.com";
         public const string SiteUrl = "https://quickservice.aloksde.com";
         public const string CompanyAddress = "Near Metro Station, HiTech City - Hyderabad Telangana - 500001";
 
         // <p style="white-space: pre-line;">@MyClass.CompanyAddress</p>
         
         public const string OwnerName = "Alok Maurya";
-        public const string OwnerEmail = "support@aloksde.com";
+        public const string OwnerEmail = "contact@aloksde.com";
         public const string OwnerPhone = "+91 xxxxx xxxxx";
         public const string RegisteredBusiness = "Microsoft Certified Business";
         public const string GSTNumber = "09HBIDY175734GZQ";
