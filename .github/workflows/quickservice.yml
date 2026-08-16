@@ -1,0 +1,61 @@
+name: Build and Deploy to SmarterASP.NET QuickService Platform
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore  QuickService/ QuickService.csproj
+
+      - name: Build Project
+        run: dotnet build  QuickService/ QuickService.csproj --configuration Release --no-restore
+
+      - name: Publish Project
+        run: dotnet publish  QuickService/ QuickService.csproj --configuration Release --no-build --output ./publish
+
+      - name: Verify Publish Folder
+        shell: pwsh
+        run: |
+          Write-Host "===== Published Files ====="
+          Get-ChildItem -Path ./publish -Recurse
+
+      - name: Deploy to SmarterASP.NET
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          local-dir: ./publish/
+          server-dir: /QuickService/
+
+          dangerous-clean-slate: false
+
+          exclude: |
+            **/.git/**
+            **/.github/**
+            **/bin/**
+            **/obj/**
+            **/node_modules/**
+            **/.vs/**
+            **/*.user
+            **/*.pdb
+            **/README.md
