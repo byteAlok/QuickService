@@ -21,7 +21,7 @@
         public const string InstagramUrl = "https://www.instagram.com";
 
         public const string Experience = "10+";
-        public const string ExpertTeams = "200+";
+        public const string ExpertTeams = "2k+";
         public const string HappyClients = "50k+";
         public const string TrustedBy = "45k+";            // Home / Families / Businesses / Viewers / Households 
         public const string TrustedByGyms = "5k+";            // Gyms
